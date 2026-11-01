@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lola Herramientas - Catálogo Digital</title>
-    <link href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQFYhOff91M8AHoGwRBYN2ThBoLiXZuyEMtYAddnjYaDI74NgvgsiL_xz8jbN1QcwyEcnN0ZBcAIbRE/pubhtml?gid=0&single=true">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #1e293b;
@@ -13,6 +13,7 @@
             --card-bg: #ffffff;
             --text: #334155;
             --gray: #64748b;
+            --whatsapp: #25d366;
         }
         * {
             box-sizing: border-box;
@@ -23,31 +24,69 @@
         body {
             background-color: var(--bg);
             color: var(--text);
-            padding-bottom: 3rem;
+            padding-bottom: 4rem;
         }
         header {
             background: var(--primary);
             color: white;
-            padding: 2.5rem 1rem;
+            padding: 2rem 1rem;
             text-align: center;
+            position: relative;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
         }
         header h1 {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.2rem;
         }
         header h1 span {
             color: var(--accent);
         }
         header p {
             color: #94a3b8;
-            font-size: 1rem;
+            font-size: 0.95rem;
+        }
+        .cart-btn-header {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--accent);
+            color: #0f172a;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         .container {
             max-width: 1200px;
             margin: 2rem auto;
             padding: 0 1.5rem;
+        }
+        .search-container {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            padding: 0.9rem 1.2rem;
+            font-size: 1rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            outline: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: border-color 0.2s;
+        }
+        .search-box:focus {
+            border-color: var(--accent);
         }
         .grid {
             display: grid;
@@ -62,10 +101,14 @@
             display: flex;
             flex-direction: column;
             border: 1px solid #e2e8f0;
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
         }
         .card-img-container {
             width: 100%;
-            height: 220px;
+            height: 200px;
             background: #f1f5f9;
             display: flex;
             align-items: center;
@@ -84,15 +127,15 @@
             flex-grow: 1;
         }
         .card-title {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 600;
             color: var(--primary);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
         .card-desc {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--gray);
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
             flex-grow: 1;
         }
         .card-footer {
@@ -100,36 +143,121 @@
             align-items: center;
             justify-content: space-between;
             margin-top: auto;
+            margin-bottom: 1rem;
         }
         .price {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: #0f172a;
         }
+        .btn-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
         .btn {
-            background-color: #25d366;
-            color: white;
-            border: none;
-            padding: 0.75rem 1.25rem;
+            flex: 1;
+            padding: 0.7rem;
             border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
+            border: none;
+            text-align: center;
+            font-size: 0.85rem;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+            transition: background 0.2s;
+        }
+        .btn-cart {
+            background-color: var(--primary);
+            color: white;
+        }
+        .btn-cart:hover {
+            background-color: #334155;
+        }
+        .btn-wa {
+            background-color: var(--whatsapp);
+            color: white;
+        }
+        .btn-wa:hover {
+            background-color: #20ba5a;
+        }
+
+        /* MODAL DEL CARRITO */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 1rem;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal {
+            background: white;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            max-height: 80vh;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.75rem;
+        }
+        .modal-header h2 {
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        .cart-items {
+            overflow-y: auto;
+            flex-grow: 1;
+            margin-bottom: 1rem;
+            max-height: 250px;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f1f5f9;
             font-size: 0.95rem;
         }
-        .btn.out {
-            background-color: #cbd5e1;
-            color: #64748b;
-            cursor: not-allowed;
-        }
-        .loading {
-            text-align: center;
-            grid-column: 1 / -1;
-            padding: 4rem;
+        .cart-total {
             font-size: 1.2rem;
+            font-weight: 700;
+            text-align: right;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        .modal-footer {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .empty-cart {
+            text-align: center;
             color: var(--gray);
+            padding: 2rem 0;
         }
     </style>
 </head>
@@ -137,71 +265,179 @@
 
     <header>
         <h1>Lola <span>Herramientas</span></h1>
-        <p>Catálogo digital oficial</p>
+        <p>Catálogo Digital</p>
+        <button class="btn-cart-header" onclick="abrirCarrito()">
+            🛒 Carrito (<span id="cart-count">0</span>)
+        </button>
     </header>
 
     <div class="container">
-        <div id="catalogo" class="grid">
-            <div class="loading">Cargando productos...</div>
+        <!-- BARRA DE BÚSQUEDA -->
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-box" placeholder="🔍 Buscar herramientas por nombre..." oninput="filtrarProductos()">
+        </div>
+
+        <!-- LISTADO DE PRODUCTOS -->
+        <div id="catalogo" class="grid"></div>
+    </div>
+
+    <!-- VENTANA MODAL DEL CARRITO -->
+    <div id="cartModal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Tu Carrito de Compras</h2>
+                <button class="close-modal" onclick="cerrarCarrito()">&times;</button>
+            </div>
+            <div id="cartItems" class="cart-items">
+                <!-- Productos agregados aparecerán aquí -->
+            </div>
+            <div class="cart-total">
+                Total: S/ <span id="cartTotal">0.00</span>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-wa" onclick="enviarPedidoWhatsApp()" style="padding: 0.9rem; font-size: 1rem;">
+                    📲 Enviar pedido por WhatsApp
+                </button>
+            </div>
         </div>
     </div>
 
     <script>
-        const SHEET_CSV_URL = https:"//docs.google.com/spreadsheets/d/e/2PACX-1vQFYhOff91M8AHoGwRBYN2ThBoLiXZuyEMtYAddnjYaDI74NgvgsiL_xz8jbN1QcwyEcnN0ZBcAIbRE/pubhtml?gid=0&single=true;
-        const TELEFONO_WHATSAPP = '51999999999';
-
-        async function cargarCatalogo() {
-            try {
-                const response = await fetch(SHEET_CSV_URL);
-                const data = await response.text();
-                const filas = data.split('\n').map(fila => fila.split(','));
-                
-                const contenedor = document.getElementById('catalogo');
-                contenedor.innerHTML = '';
-
-                for (let i = 1; i < filas.length; i++) {
-                    const col = filas[i];
-                    if (col.length >= 6 && col[1]) {
-                        const nombre = col[1].replace(/"/g, '').trim();
-                        const precio = col[2].replace(/"/g, '').trim();
-                        const descripcion = col[3].replace(/"/g, '').trim();
-                        const imagen = col[4].replace(/"/g, '').trim();
-                        const stock = parseInt(col[5].replace(/"/g, '').trim()) || 0;
-
-                        const enStock = stock > 0;
-                        const mensaje = encodeURIComponent(`Hola, me interesa comprar: *${nombre}* (${precio})`);
-                        const linkWs = `https://wa.me/${TELEFONO_WHATSAPP}?text=${mensaje}`;
-
-                        const tarjeta = document.createElement('div');
-                        tarjeta.className = 'card';
-                        tarjeta.innerHTML = `
-                            <div class="card-img-container">
-                                <img src="${imagen}" alt="${nombre}" onerror="this.src='https://via.placeholder.com/300?text=Sin+Imagen'">
-                            </div>
-                            <div class="card-body">
-                                <h3 class="card-title">${nombre}</h3>
-                                <p class="card-desc">${descripcion}</p>
-                                <div class="card-footer">
-                                    <span class="price">S/ ${precio}</span>
-                                    ${enStock 
-                                        ? `<a href="${linkWs}" target="_blank" class="btn">Pedir por WhatsApp</a>`
-                                        : `<button class="btn out" disabled>Agotado</button>`
-                                    }
-                                </div>
-                            </div>
-                        `;
-                        contenedor.appendChild(tarjeta);
-                    }
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('catalogo').innerHTML = '<p class="loading">Error al cargar productos.</p>';
+        // LISTA DE PRODUCTOS (Puedes editar, agregar o cambiar aquí fácilmente)
+        const productos = [
+            {
+                id: 1,
+                nombre: "Llaves mixtas",
+                precio: 320,
+                descripcion: "Juego de 12 piezas profesionales",
+                imagen: "https://media.falabella.com/sodimaPE/1221817_01/w=1500,h=1500,fit=cover"
+            },
+            {
+                id: 2,
+                nombre: "Rotores",
+                precio: 230,
+                descripcion: "Rotores de acero de alta resistencia",
+                imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtCiA3i56BZcydk-IT9kxQW-EcQ&s=10"
             }
+        ];
+
+        const TELEFONO_WHATSAPP = '51999999999'; // Reemplaza con tu número de WhatsApp real
+        let carrito = [];
+
+        function renderizarProductos(lista) {
+            const contenedor = document.getElementById('catalogo');
+            contenedor.innerHTML = '';
+
+            if (lista.length === 0) {
+                contenedor.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #64748b; padding: 2rem;">No se encontraron herramientas.</p>';
+                return;
+            }
+
+            lista.forEach(prod => {
+                const mensajeIndividual = encodeURIComponent(`Hola, me interesa comprar: *${prod.nombre}* (S/ ${prod.precio})`);
+                const linkWaIndividual = `https://wa.me/${TELEFONO_WHATSAPP}?text=${mensajeIndividual}`;
+
+                const tarjeta = document.createElement('div');
+                tarjeta.className = 'card';
+                tarjeta.innerHTML = `
+                    <div class="card-img-container">
+                        <img src="${prod.imagen}" alt="${prod.nombre}" onerror="this.src='https://via.placeholder.com/300?text=Sin+Imagen'">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">${prod.nombre}</h3>
+                        <p class="card-desc">${prod.descripcion}</p>
+                        <div class="card-footer">
+                            <span class="price">S/ ${prod.precio}</span>
+                        </div>
+                        <div class="btn-actions">
+                            <button class="btn btn-cart" onclick="agregarAlCarrito(${prod.id})">🛒 Añadir</button>
+                            <a href="${linkWaIndividual}" target="_blank" class="btn btn-wa">📲 Pedir</a>
+                        </div>
+                    </div>
+                `;
+                contenedor.appendChild(tarjeta);
+            });
         }
 
-        cargarCatalogo();
+        function filtrarProductos() {
+            const texto = document.getElementById('searchInput').value.toLowerCase();
+            const filtrados = productos.filter(p => p.nombre.toLowerCase().includes(texto) || p.descripcion.toLowerCase().includes(texto));
+            renderizarProductos(filtrados);
+        }
+
+        function agregarAlCarrito(id) {
+            const producto = productos.find(p => p.id === id);
+            carrito.push(producto);
+            actualizarCarritoUI();
+            
+            // Animación visual rápida o aviso sutil
+            alert(`¡${producto.nombre} agregado al carrito!`);
+        }
+
+        function actualizarCarritoUI() {
+            document.getElementById('cart-count').innerText = carrito.length;
+            
+            const contenedorItems = document.getElementById('cartItems');
+            contenedorItems.innerHTML = '';
+
+            if (carrito.length === 0) {
+                contenedorItems.innerHTML = '<p class="empty-cart">Tu carrito está vacío</p>';
+                document.getElementById('cartTotal').innerText = '0.00';
+                return;
+            }
+
+            let total = 0;
+            carrito.forEach((item, index) => {
+                total += item.precio;
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `
+                    <span>${item.nombre}</span>
+                    <span>S/ ${item.precio} <button onclick="eliminarDelCarrito(${index})" style="background:none;border:none;color:red;cursor:pointer;margin-left:8px;">✕</button></span>
+                `;
+                contenedorItems.appendChild(div);
+            });
+
+            document.getElementById('cartTotal').innerText = total.toFixed(2);
+        }
+
+        function eliminarDelCarrito(index) {
+            carrito.splice(index, 1);
+            actualizarCarritoUI();
+        }
+
+        function abrirCarrito() {
+            document.getElementById('cartModal').classList.add('active');
+        }
+
+        function cerrarCarrito() {
+            document.getElementById('cartModal').classList.remove('active');
+        }
+
+        function enviarPedidoWhatsApp() {
+            if (carrito.length === 0) {
+                alert("Tu carrito está vacío.");
+                return;
+            }
+
+            let mensaje = "Hola, quiero realizar el siguiente pedido en *Lola Herramientas*:\n\n";
+            let total = 0;
+
+            carrito.forEach((item, idx) => {
+                mensaje += `${idx + 1}. ${item.nombre} - S/ ${item.precio}\n`;
+                total += item.precio;
+            });
+
+            mensaje += `\n*Total a pagar: S/ ${total.toFixed(2)}*`;
+
+            const url = `https://wa.me/${TELEFONO_WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, '_blank');
+        }
+
+        // Cargar productos al iniciar la página
+        renderizarProductos(productos);
     </script>
 </body>
 </html>
-         
-           
+
+    
