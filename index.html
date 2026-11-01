@@ -1,7 +1,4 @@
-
-   
-     
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -38,7 +35,6 @@
         header h1 {
             font-size: 2.2rem;
             font-weight: 700;
-            letter-spacing: -0.5px;
             margin-bottom: 0.5rem;
         }
         header h1 span {
@@ -63,14 +59,9 @@
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
             display: flex;
             flex-direction: column;
             border: 1px solid #e2e8f0;
-        }
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
         .card-img-container {
             width: 100%;
@@ -126,12 +117,7 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            transition: background 0.2s;
             font-size: 0.95rem;
-        }
-        .btn:hover {
-            background-color: #20ba5a;
         }
         .btn.out {
             background-color: #cbd5e1;
@@ -151,19 +137,18 @@
 
     <header>
         <h1>Lola <span>Herramientas</span></h1>
-        <p>Equipamiento profesional y de alta calidad para tu taller o negocio</p>
+        <p>Catálogo digital oficial</p>
     </header>
 
     <div class="container">
         <div id="catalogo" class="grid">
-            <div class="loading">Cargando productos de la tienda...</div>
+            <div class="loading">Cargando productos...</div>
         </div>
     </div>
 
     <script>
-        // ¡REEMPLAZA ESTE ENLACE POR EL CSV DE TU GOOGLE SHEETS!
         const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1d1F4UZHNQUqjiy7NgGku-ZsDmPylu83Up7YDAxOKTnse/export?format=csv&gid=0';
-        const TELEFONO_WHATSAPP = '51999999999'; // Cambia por tu número de WhatsApp
+        const TELEFONO_WHATSAPP = '51999999999';
 
         async function cargarCatalogo() {
             try {
@@ -174,7 +159,6 @@
                 const contenedor = document.getElementById('catalogo');
                 contenedor.innerHTML = '';
 
-                // Empezamos desde i = 1 para saltar la cabecera (id, nombre, precio...)
                 for (let i = 1; i < filas.length; i++) {
                     const col = filas[i];
                     if (col.length >= 6 && col[1]) {
@@ -210,8 +194,8 @@
                     }
                 }
             } catch (error) {
-                console.error('Error cargando el catálogo:', error);
-                document.getElementById('catalogo').innerHTML = '<p class="loading">Hubo un error al cargar los productos.</p>';
+                console.error('Error:', error);
+                document.getElementById('catalogo').innerHTML = '<p class="loading">Error al cargar productos.</p>';
             }
         }
 
@@ -219,3 +203,5 @@
     </script>
 </body>
 </html>
+         
+           
