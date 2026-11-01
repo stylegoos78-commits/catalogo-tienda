@@ -184,8 +184,6 @@
         .btn-wa:hover {
             background-color: #20ba5a;
         }
-
-        /* MODAL DEL CARRITO */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -266,31 +264,26 @@
     <header>
         <h1>Lola <span>Herramientas</span></h1>
         <p>Catálogo Digital</p>
-        <button class="btn-cart-header" onclick="abrirCarrito()">
+        <button class="cart-btn-header" onclick="abrirCarrito()">
             🛒 Carrito (<span id="cart-count">0</span>)
         </button>
     </header>
 
     <div class="container">
-        <!-- BARRA DE BÚSQUEDA -->
         <div class="search-container">
-            <input type="text" id="searchInput" class="search-box" placeholder="🔍 Buscar herramientas por nombre..." oninput="filtrarProductos()">
+            <input type="text" id="searchInput" class="search-box" placeholder="🔍 Buscar llave, alicate, martillo..." oninput="filtrarProductos()">
         </div>
 
-        <!-- LISTADO DE PRODUCTOS -->
         <div id="catalogo" class="grid"></div>
     </div>
 
-    <!-- VENTANA MODAL DEL CARRITO -->
     <div id="cartModal" class="modal-overlay">
         <div class="modal">
             <div class="modal-header">
                 <h2>Tu Carrito de Compras</h2>
                 <button class="close-modal" onclick="cerrarCarrito()">&times;</button>
             </div>
-            <div id="cartItems" class="cart-items">
-                <!-- Productos agregados aparecerán aquí -->
-            </div>
+            <div id="cartItems" class="cart-items"></div>
             <div class="cart-total">
                 Total: S/ <span id="cartTotal">0.00</span>
             </div>
@@ -303,25 +296,31 @@
     </div>
 
     <script>
-        // LISTA DE PRODUCTOS (Puedes editar, agregar o cambiar aquí fácilmente)
         const productos = [
             {
                 id: 1,
-                nombre: "Llaves mixtas",
-                precio: 320,
-                descripcion: "Juego de 12 piezas profesionales",
-                imagen: "https://media.falabella.com/sodimaPE/1221817_01/w=1500,h=1500,fit=cover"
+                nombre: "Llave Ajustable",
+                precio: 45,
+                descripcion: "Llave francesa de alta resistencia profesional",
+                imagen: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=500&auto=format&fit=crop&q=60"
             },
             {
                 id: 2,
-                nombre: "Rotores",
-                precio: 230,
-                descripcion: "Rotores de acero de alta resistencia",
-                imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtCiA3i56BZcydk-IT9kxQW-EcQ&s=10"
+                nombre: "Alicate Universal",
+                precio: 35,
+                descripcion: "Alicate de corte y sujeción con mango aislado",
+                imagen: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?w=500&auto=format&fit=crop&q=60"
+            },
+            {
+                id: 3,
+                nombre: "Martillo de Carpintero",
+                precio: 50,
+                descripcion: "Martillo con uña curva y mango ergonómico anti-impacto",
+                imagen: "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=500&auto=format&fit=crop&q=60"
             }
         ];
 
-        const TELEFONO_WHATSAPP = '51951963856'; // Reemplaza con tu número de WhatsApp real
+        const TELEFONO_WHATSAPP = '51951963856';
         let carrito = [];
 
         function renderizarProductos(lista) {
@@ -369,8 +368,6 @@
             const producto = productos.find(p => p.id === id);
             carrito.push(producto);
             actualizarCarritoUI();
-            
-            // Animación visual rápida o aviso sutil
             alert(`¡${producto.nombre} agregado al carrito!`);
         }
 
@@ -434,10 +431,16 @@
             window.open(url, '_blank');
         }
 
-        // Cargar productos al iniciar la página
         renderizarProductos(productos);
     </script>
 </body>
 </html>
+        
+  
 
-    
+
+
+
+
+           
+
