@@ -1,144 +1,221 @@
-<!DOCTYPE html>
+
+   
+     
+  <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Catálogo Digital</title>
-  <style>
-    * { box-sizing: border-box; font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    body { background-color: #f4f4f9; padding: 20px; }
-    h1 { text-align: center; margin-bottom: 20px; color: #333; }
-    
-    .catalogo {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .tarjeta {
-      background: white;
-      border-radius: 10px;
-      padding: 15px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.08);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      text-align: center;
-    }
-
-    .tarjeta img {
-      width: 100%;
-      height: 170px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    .tarjeta h3 { margin: 10px 0 5px; font-size: 18px; color: #222; }
-    .tarjeta p { color: #666; font-size: 13px; margin-bottom: 10px; }
-    .precio { font-size: 18px; font-weight: bold; color: #008cba; margin-bottom: 12px; }
-
-    .btn-whatsapp {
-      background-color: #25D366;
-      color: white;
-      text-decoration: none;
-      padding: 10px;
-      border-radius: 6px;
-      font-weight: bold;
-      display: block;
-    }
-
-    .btn-agotado {
-      background-color: #b0b0b0;
-      color: white;
-      padding: 10px;
-      border-radius: 6px;
-      font-weight: bold;
-      display: block;
-      cursor: not-allowed;
-    }
-
-    .cargando { text-align: center; font-size: 18px; color: #666; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lola Herramientas - Catálogo Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e293b;
+            --accent: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #334155;
+            --gray: #64748b;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            padding-bottom: 3rem;
+        }
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+        }
+        header h1 span {
+            color: var(--accent);
+        }
+        header p {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #e2e8f0;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .card-img-container {
+            width: 100%;
+            height: 220px;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .card-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 1.2rem;
+            flex-grow: 1;
+        }
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+        .price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .btn {
+            background-color: #25d366;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background 0.2s;
+            font-size: 0.95rem;
+        }
+        .btn:hover {
+            background-color: #20ba5a;
+        }
+        .btn.out {
+            background-color: #cbd5e1;
+            color: #64748b;
+            cursor: not-allowed;
+        }
+        .loading {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 4rem;
+            font-size: 1.2rem;
+            color: var(--gray);
+        }
+    </style>
 </head>
 <body>
 
-  <h1>Catálogo Digital</h1>
-  <div id="cargando" class="cargando">Cargando catálogo...</div>
-  <div class="catalogo" id="contenedor-productos"></div>
+    <header>
+        <h1>Lola <span>Herramientas</span></h1>
+        <p>Equipamiento profesional y de alta calidad para tu taller o negocio</p>
+    </header>
 
-  <script>
-    // 1. CONFIGURA AQUÍ TU NÚMERO DE WHATSAPP (código de país 51 + número)
-    const NUMERO_WHATSAPP = "51999999999"; 
+    <div class="container">
+        <div id="catalogo" class="grid">
+            <div class="loading">Cargando productos de la tienda...</div>
+        </div>
+    </div>
 
-    // 2. PEGA AQUÍ EL ENLACE CSV QUE COPIASTE EN EL PASO 2 DE GOOGLE SHEETS
-    const URL_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQFYhOff91M8AHoGwRBYN2ThBoLiXZuyEMtYAddnjYaDI74NgvgsiL_xz8jbN1QcwyEcnN0ZBcAIbRE/pub?gid=0&single=true&output=csv";
+    <script>
+        // ¡REEMPLAZA ESTE ENLACE POR EL CSV DE TU GOOGLE SHEETS!
+        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1d1F4UZHNQUqjiy7NgGku-ZsDmPylu83Up7YDAxOKTnse/export?format=csv&gid=0';
+        const TELEFONO_WHATSAPP = '51999999999'; // Cambia por tu número de WhatsApp
 
-    async function cargarCatalogo() {
-      try {
-        const respuesta = await fetch(URL_CSV);
-        const dataText = await respuesta.text();
+        async function cargarCatalogo() {
+            try {
+                const response = await fetch(SHEET_CSV_URL);
+                const data = await response.text();
+                const filas = data.split('\n').map(fila => fila.split(','));
+                
+                const contenedor = document.getElementById('catalogo');
+                contenedor.innerHTML = '';
 
-        // Convertir el CSV de Google Sheets en líneas
-        const filas = dataText.split('\n').map(f => f.trim()).filter(f => f.length > 0);
-        const productos = [];
+                // Empezamos desde i = 1 para saltar la cabecera (id, nombre, precio...)
+                for (let i = 1; i < filas.length; i++) {
+                    const col = filas[i];
+                    if (col.length >= 6 && col[1]) {
+                        const nombre = col[1].replace(/"/g, '').trim();
+                        const precio = col[2].replace(/"/g, '').trim();
+                        const descripcion = col[3].replace(/"/g, '').trim();
+                        const imagen = col[4].replace(/"/g, '').trim();
+                        const stock = parseInt(col[5].replace(/"/g, '').trim()) || 0;
 
-        // Ignorar la primera fila (encabezados) y procesar los datos
-        for (let i = 1; i < filas.length; i++) {
-          const columnas = filas[i].split(',');
-          if (columnas.length >= 6) {
-            productos.push({
-              id: columnas[0],
-              nombre: columnas[1],
-              precio: columnas[2],
-              descripcion: columnas[3],
-              imagen: columnas[4],
-              stock: parseInt(columnas[5]) || 0
-            });
-          }
+                        const enStock = stock > 0;
+                        const mensaje = encodeURIComponent(`Hola, me interesa comprar: *${nombre}* (${precio})`);
+                        const linkWs = `https://wa.me/${TELEFONO_WHATSAPP}?text=${mensaje}`;
+
+                        const tarjeta = document.createElement('div');
+                        tarjeta.className = 'card';
+                        tarjeta.innerHTML = `
+                            <div class="card-img-container">
+                                <img src="${imagen}" alt="${nombre}" onerror="this.src='https://via.placeholder.com/300?text=Sin+Imagen'">
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">${nombre}</h3>
+                                <p class="card-desc">${descripcion}</p>
+                                <div class="card-footer">
+                                    <span class="price">S/ ${precio}</span>
+                                    ${enStock 
+                                        ? `<a href="${linkWs}" target="_blank" class="btn">Pedir por WhatsApp</a>`
+                                        : `<button class="btn out" disabled>Agotado</button>`
+                                    }
+                                </div>
+                            </div>
+                        `;
+                        contenedor.appendChild(tarjeta);
+                    }
+                }
+            } catch (error) {
+                console.error('Error cargando el catálogo:', error);
+                document.getElementById('catalogo').innerHTML = '<p class="loading">Hubo un error al cargar los productos.</p>';
+            }
         }
 
-        dibujarProductos(productos);
-      } catch (error) {
-        document.getElementById('cargando').innerText = "Error cargando los productos. Revisa el enlace de Google Sheets.";
-      }
-    }
-
-    function dibujarProductos(productos) {
-      document.getElementById('cargando').style.display = 'none';
-      const contenedor = document.getElementById('contenedor-productos');
-      contenedor.innerHTML = '';
-
-      productos.forEach(prod => {
-        const tarjeta = document.createElement('div');
-        tarjeta.className = 'tarjeta';
-
-        let botonHTML = '';
-        if (prod.stock > 0) {
-          const mensaje = encodeURIComponent(`Hola, me interesa comprar: ${prod.nombre} (${prod.precio})`);
-          const urlWa = `https://wa.me/${NUMERO_WHATSAPP}?text=${mensaje}`;
-          botonHTML = `<a href="${urlWa}" target="_blank" class="btn-whatsapp">Pedir por WhatsApp</a>`;
-        } else {
-          botonHTML = `<span class="btn-agotado">Agotado</span>`;
-        }
-
-        tarjeta.innerHTML = `
-          <img src="${prod.imagen}" alt="${prod.nombre}">
-          <div>
-            <h3>${prod.nombre}</h3>
-            <p>${prod.descripcion}</p>
-            <div class="precio">${prod.precio}</div>
-          </div>
-          ${botonHTML}
-        `;
-
-        contenedor.appendChild(tarjeta);
-      });
-    }
-
-    cargarCatalogo();
-  </script>
-
+        cargarCatalogo();
+    </script>
 </body>
 </html>
