@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Catálogo Digital</title>
+  <style>
+    * { box-sizing: border-box; font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    body { background-color: #f4f4f9; padding: 20px; }
+    h1 { text-align: center; margin-bottom: 20px; color: #333; }
+    
+    .catalogo {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .tarjeta {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+    }
+
+    .tarjeta img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .tarjeta h3 { margin: 10px 0 5px; font-size: 18px; color: #222; }
+    .tarjeta p { color: #666; font-size: 13px; margin-bottom: 10px; }
+    .precio { font-size: 18px; font-weight: bold; color: #008cba; margin-bottom: 12px; }
+
+    .btn-whatsapp {
+      background-color: #25D366;
+      color: white;
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      display: block;
+    }
+
+    .btn-agotado {
+      background-color: #b0b0b0;
+      color: white;
+      padding: 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      display: block;
+      cursor: not-allowed;
+    }
+
+    .cargando { text-align: center; font-size: 18px; color: #666; }
+  </style>
+</head>
+<body>
+
+  <h1>Catálogo Digital</h1>
+  <div id="cargando" class="cargando">Cargando catálogo...</div>
+  <div class="catalogo" id="contenedor-productos"></div>
+
+  <script>
+    // 1. CONFIGURA AQUÍ TU NÚMERO DE WHATSAPP (código de país 51 + número)
+    const NUMERO_WHATSAPP = "51999999999"; 
+
+    // 2. PEGA AQUÍ EL ENLACE CSV QUE COPIASTE EN EL PASO 2 DE GOOGLE SHEETS
+    const URL_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQFYhOff91M8AHoGwRBYN2ThBoLiXZuyEMtYAddnjYaDI74NgvgsiL_xz8jbN1QcwyEcnN0ZBcAIbRE/pub?gid=0&single=true&output=csv";
+
+    async function cargarCatalogo() {
+      try {
+        const respuesta = await fetch(URL_CSV);
+        const dataText = await respuesta.text();
+
+        // Convertir el CSV de Google Sheets en líneas
+        const filas = dataText.split('\n').map(f => f.trim()).filter(f => f.length > 0);
+        const productos = [];
+
+        // Ignorar la primera fila (encabezados) y procesar los datos
+        for (let i = 1; i < filas.length; i++) {
+          const columnas = filas[i].split(',');
+          if (columnas.length >= 6) {
+            productos.push({
+              id: columnas[0],
+              nombre: columnas[1],
+              precio: columnas[2],
+              descripcion: columnas[3],
+              imagen: columnas[4],
+              stock: parseInt(columnas[5]) || 0
+            });
+          }
+        }
+
+        dibujarProductos(productos);
+      } catch (error) {
+        document.getElementById('cargando').innerText = "Error cargando los productos. Revisa el enlace de Google Sheets.";
+      }
+    }
+
+    function dibujarProductos(productos) {
+      document.getElementById('cargando').style.display = 'none';
+      const contenedor = document.getElementById('contenedor-productos');
+      contenedor.innerHTML = '';
+
+      productos.forEach(prod => {
+        const tarjeta = document.createElement('div');
+        tarjeta.className = 'tarjeta';
+
+        let botonHTML = '';
+        if (prod.stock > 0) {
+          const mensaje = encodeURIComponent(`Hola, me interesa comprar: ${prod.nombre} (${prod.precio})`);
+          const urlWa = `https://wa.me/${NUMERO_WHATSAPP}?text=${mensaje}`;
+          botonHTML = `<a href="${urlWa}" target="_blank" class="btn-whatsapp">Pedir por WhatsApp</a>`;
+        } else {
+          botonHTML = `<span class="btn-agotado">Agotado</span>`;
+        }
+
+        tarjeta.innerHTML = `
+          <img src="${prod.imagen}" alt="${prod.nombre}">
+          <div>
+            <h3>${prod.nombre}</h3>
+            <p>${prod.descripcion}</p>
+            <div class="precio">${prod.precio}</div>
+          </div>
+          ${botonHTML}
+        `;
+
+        contenedor.appendChild(tarjeta);
+      });
+    }
+
+    cargarCatalogo();
+  </script>
+
+</body>
+</html>
