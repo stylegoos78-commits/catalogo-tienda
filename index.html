@@ -63,6 +63,24 @@
             gap: 0.4rem;
             font-size: 0.95rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transition: transform 0.15s ease;
+        }
+        .cart-btn-header:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+        @media (max-width: 600px) {
+            header {
+                padding-bottom: 4.5rem;
+            }
+            .cart-btn-header {
+                top: auto;
+                bottom: 12px;
+                right: 50%;
+                transform: translateX(50%);
+            }
+            .cart-btn-header:active {
+                transform: translateX(50%) scale(0.95);
+            }
         }
         .container {
             max-width: 1200px;
@@ -131,6 +149,7 @@
             font-weight: 600;
             color: var(--primary);
             margin-bottom: 0.4rem;
+            text-transform: capitalize;
         }
         .card-desc {
             font-size: 0.85rem;
@@ -184,6 +203,107 @@
         .btn-wa:hover {
             background-color: #20ba5a;
         }
+
+        /* Sección de modalidades de compra / cierre de trato */
+        .deal-section {
+            margin-top: 4rem;
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+        .deal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .deal-header h2 {
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .deal-header p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        .deal-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .deal-card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: border-color 0.2s;
+        }
+        .deal-card.highlight {
+            border-color: var(--accent);
+            background: #fffbeb;
+        }
+        .deal-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.3rem 0.75rem;
+            border-radius: 999px;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .deal-card.highlight .deal-badge {
+            background: var(--accent);
+            color: #0f172a;
+        }
+        .deal-card h3 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.6rem;
+        }
+        .deal-card p {
+            font-size: 0.9rem;
+            color: var(--text);
+            line-height: 1.5;
+        }
+        .deal-examples {
+            margin-top: 0.8rem;
+            padding-top: 0.8rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.85rem;
+            color: #475569;
+        }
+
+        /* Notificación Toast (sin ventana emergente) */
+        .toast-notification {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--primary);
+            color: white;
+            padding: 0.9rem 1.4rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-left: 5px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            z-index: 2000;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+        .toast-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Modal Carrito */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -206,7 +326,7 @@
             box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
-            max-height: 80vh;
+            max-height: 85vh;
         }
         .modal-header {
             display: flex;
@@ -231,7 +351,7 @@
             overflow-y: auto;
             flex-grow: 1;
             margin-bottom: 1rem;
-            max-height: 250px;
+            max-height: 220px;
         }
         .cart-item {
             display: flex;
@@ -240,6 +360,28 @@
             padding: 0.5rem 0;
             border-bottom: 1px solid #f1f5f9;
             font-size: 0.95rem;
+        }
+        .payment-method-box {
+            background: #f8fafc;
+            padding: 0.8rem;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 1rem;
+        }
+        .payment-method-box label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            color: var(--primary);
+        }
+        .payment-method-box select {
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            font-size: 0.9rem;
+            background: white;
         }
         .cart-total {
             font-size: 1.2rem;
@@ -275,8 +417,37 @@
         </div>
 
         <div id="catalogo" class="grid"></div>
+
+        <!-- Nueva sección: Cómo cerramos trato -->
+        <section class="deal-section">
+            <div class="deal-header">
+                <h2>🤝 ¿Cómo cerramos el trato?</h2>
+                <p>Elige la modalidad que más te convenga para llevarte tus herramientas</p>
+            </div>
+            <div class="deal-options">
+                <div class="deal-card">
+                    <span class="deal-badge">Opción 1</span>
+                    <h3>💵 Compra directa con dinero</h3>
+                    <p>Adquiere cualquiera de nuestras herramientas al precio publicado mediante pago en efectivo, Yape, Plin o transferencia bancaria al momento de la entrega.</p>
+                </div>
+                <div class="deal-card highlight">
+                    <span class="deal-badge">Opción 2 • ¡Ahorra!</span>
+                    <h3>♻️ Pago o parte de pago con Cachina</h3>
+                    <p>Aceptamos tus materiales en desuso como forma de pago (total o parcial) para que te salga más económico renovar tus herramientas.</p>
+                    <div class="deal-examples">
+                        <strong>¿Qué recibimos?</strong> Fierro viejo, discos de corte gastados, herramientas malogradas, repuestos metálicos y chatarra en general. ¡Cotizamos al instante por WhatsApp!
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
+    <!-- Notificación suave tipo Toast -->
+    <div id="toast" class="toast-notification">
+        ✅ <span id="toast-msg">Se guardó en el carrito</span>
+    </div>
+
+    <!-- Modal del Carrito -->
     <div id="cartModal" class="modal-overlay">
         <div class="modal">
             <div class="modal-header">
@@ -284,8 +455,17 @@
                 <button class="close-modal" onclick="cerrarCarrito()">&times;</button>
             </div>
             <div id="cartItems" class="cart-items"></div>
+            
+            <div class="payment-method-box">
+                <label for="modalidadTrato">¿Cómo deseas cerrar el trato?</label>
+                <select id="modalidadTrato">
+                    <option value="Opción 1: Pago con dinero (Efectivo / Yape / Plin)">💵 Opción 1: Pago con dinero</option>
+                    <option value="Opción 2: Canje / Parte de pago con Cachina (fierro, discos gastados, etc.)">♻️ Opción 2: Canje con Cachina (fierro, discos, etc.)</option>
+                </select>
+            </div>
+
             <div class="cart-total">
-                Total: S/ <span id="cartTotal">0.00</span>
+                Total referencial: S/ <span id="cartTotal">0.00</span>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-wa" onclick="enviarPedidoWhatsApp()" style="padding: 0.9rem; font-size: 1rem;">
@@ -318,43 +498,43 @@
                 descripcion: "Martillo con uña curva y mango ergonómico anti-impacto",
                 imagen: "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=500&auto=format&fit=crop&q=60"
             },
-             {
+            {
                 id: 4,
-                nombre: "cierra de cuatro discos",
+                nombre: "Sierra de cuatro discos",
                 precio: 120,
-                descripcion: "cierra con 4 discos de cambio",
+                descripcion: "Sierra versátil con 4 discos intercambiables",
                 imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhSypdjSu4gan4-4BUQwpv2jrnySjq6FiDVNAr6SMLC3uYCJ320zDU_-Ec&s=10"
             },
             {
                 id: 5,
-                nombre: "pistola de dado",
+                nombre: "Pistola de dado",
                 precio: 420,
-                descripcion: "cierra con 4 discos de cambio",
-                 imagen: "https://alaska.pe/wp-content/uploads/2023/08/Pistola-de-impacto-GDX-180-LI-Bosch-1.jpg"
+                descripcion: "Pistola de impacto inalámbrica de alto torque",
+                imagen: "https://alaska.pe/wp-content/uploads/2023/08/Pistola-de-impacto-GDX-180-LI-Bosch-1.jpg"
             },
-              {
+            {
                 id: 6,
-                nombre: "rachi de 1/2 Americana",
+                nombre: "Rachi de 1/2 Americana",
                 precio: 480,
-                descripcion: "rachi americana de medias",
-                 imagen: "https://http2.mlstatic.com/D_NQ_NP_783658-MPE116169508128_092026-O.webp"
-            },
-            
-            
-            
-            
-            
-            
-            
-            
-    
-            
-            
-        
+                descripcion: "Rachi americana de encastre de 1/2 pulgada",
+                imagen: "https://http2.mlstatic.com/D_NQ_NP_783658-MPE116169508128_092026-O.webp"
+            }
         ];
 
         const TELEFONO_WHATSAPP = '51951963856';
         let carrito = [];
+        let toastTimeout;
+
+        function mostrarNotificacion(texto) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = texto;
+            toast.classList.add('show');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2200);
+        }
 
         function renderizarProductos(lista) {
             const contenedor = document.getElementById('catalogo');
@@ -401,7 +581,7 @@
             const producto = productos.find(p => p.id === id);
             carrito.push(producto);
             actualizarCarritoUI();
-            alert(`¡${producto.nombre} agregado al carrito!`);
+            mostrarNotificacion(`Se guardó "${producto.nombre}" en el carrito`);
         }
 
         function actualizarCarritoUI() {
@@ -446,10 +626,11 @@
 
         function enviarPedidoWhatsApp() {
             if (carrito.length === 0) {
-                alert("Tu carrito está vacío.");
+                mostrarNotificacion("Tu carrito está vacío");
                 return;
             }
 
+            const modalidad = document.getElementById('modalidadTrato').value;
             let mensaje = "Hola, quiero realizar el siguiente pedido en *Lola Herramientas*:\n\n";
             let total = 0;
 
@@ -458,7 +639,8 @@
                 total += item.precio;
             });
 
-            mensaje += `\n*Total a pagar: S/ ${total.toFixed(2)}*`;
+            mensaje += `\n*Total referencial: S/ ${total.toFixed(2)}*`;
+            mensaje += `\n*Modalidad elegida:* ${modalidad}`;
 
             const url = `https://wa.me/${TELEFONO_WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
             window.open(url, '_blank');
@@ -468,7 +650,21 @@
     </script>
 </body>
 </html>
+    
+         
+   
+    
+       
         
+ 
+         
+
+
+            
+    
+            
+            
+  
   
 
 
