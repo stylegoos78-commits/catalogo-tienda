@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Manito Herramientas- Catálogo Digital</title>
+    <title>Manito Herramientas - Catálogo Digital</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -171,7 +171,36 @@
         }
         .btn-actions {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.6rem;
+            align-items: center;
+        }
+        .qty-selector {
+            display: flex;
+            align-items: center;
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .qty-btn {
+            background: transparent;
+            border: none;
+            padding: 0.6rem 0.85rem;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary);
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .qty-btn:hover {
+            background: #e2e8f0;
+        }
+        .qty-value {
+            min-width: 26px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--primary);
         }
         .btn {
             flex: 1;
@@ -181,7 +210,7 @@
             cursor: pointer;
             border: none;
             text-align: center;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
@@ -276,7 +305,7 @@
             color: #475569;
         }
 
-        /* Notificación Toast (sin ventana emergente) */
+        /* Notificación Toast */
         .toast-notification {
             position: fixed;
             bottom: 24px;
@@ -418,7 +447,7 @@
 
         <div id="catalogo" class="grid"></div>
 
-        <!-- Nueva sección: Cómo cerramos trato -->
+        <!-- Sección: Cómo cerramos trato -->
         <section class="deal-section">
             <div class="deal-header">
                 <h2>🤝 ¿Cómo cerramos el trato?</h2>
@@ -435,11 +464,10 @@
                     <h3>♻️ Plan Renove: Parte de pago con equipos en desuso</h3>
                     <p>Aceptamos tus materiales en desuso como forma de pago (total o parcial) para que te salga más económico renovar tus herramientas.</p>
                     <div class="deal-examples">
-                    <div>
-    <p><strong>✅ ¿Qué recibimos?</strong> Fierro viejo, discos de corte gastados, herramientas malogradas, repuestos metálicos y chatarra pesada en general.</p>
-    <p style="margin-top: 8px; color: #b91c1c;"><strong>❌ No recibimos:</strong> Plástico, cartón, papel, madera, vidrio, llantas ni desmonte.</p>
-    <p style="margin-top: 8px;"><em>¡Cotizamos tus metales al instante por WhatsApp!</em></p>
-</div>
+                        <p><strong>✅ ¿Qué recibimos?</strong> Fierro viejo, discos de corte gastados, herramientas malogradas, repuestos metálicos y chatarra pesada en general.</p>
+                        <p style="margin-top: 8px; color: #b91c1c;"><strong>❌ No recibimos:</strong> Plástico, cartón, papel, madera, vidrio, llantas ni desmonte.</p>
+                        <p style="margin-top: 8px;"><em>¡Cotizamos tus metales al instante por WhatsApp!</em></p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -463,9 +491,9 @@
                 <label for="modalidadTrato">¿Cómo deseas cerrar el trato?</label>
                 <select id="modalidadTrato">
                     <option value="Opción 1: Pago con dinero (Efectivo / Yape / Plin)">💵 Opción 1: Pago con dinero</option>
-                    <option value="Opción 2: Plan Renove / Parte de pago con materiales en desuso"(fierro, discos gastados, etc.)">♻️ Opción 2: Plan Renove (fierro, discos, etc.)</option>
+                    <option value="Opción 2: Plan Renove / Parte de pago con materiales en desuso (fierro, discos gastados, etc.)">♻️ Opción 2: Plan Renove (fierro, discos, etc.)</option>
                 </select>
-            </div
+            </div>
 
             <div class="cart-total">
                 Total referencial: S/ <span id="cartTotal">0.00</span>
@@ -539,6 +567,13 @@
             }, 2200);
         }
 
+        function cambiarCantidadTarjeta(id, cambio) {
+            const span = document.getElementById(`qty-${id}`);
+            let cantidad = parseInt(span.innerText) + cambio;
+            if (cantidad < 1) cantidad = 1;
+            span.innerText = cantidad;
+        }
+
         function renderizarProductos(lista) {
             const contenedor = document.getElementById('catalogo');
             contenedor.innerHTML = '';
@@ -549,9 +584,6 @@
             }
 
             lista.forEach(prod => {
-                const mensajeIndividual = encodeURIComponent(`Hola, me interesa comprar: *${prod.nombre}* (S/ ${prod.precio})`);
-                const linkWaIndividual = `https://wa.me/${TELEFONO_WHATSAPP}?text=${mensajeIndividual}`;
-
                 const tarjeta = document.createElement('div');
                 tarjeta.className = 'card';
                 tarjeta.innerHTML = `
@@ -565,8 +597,12 @@
                             <span class="price">S/ ${prod.precio}</span>
                         </div>
                         <div class="btn-actions">
-                            <button class="btn btn-cart" onclick="agregarAlCarrito(${prod.id})">🛒 Añadir</button>
-                            <a href="${linkWaIndividual}" target="_blank" class="btn btn-wa">📲 Pedir</a>
+                            <div class="qty-selector">
+                                <button type="button" class="qty-btn" onclick="cambiarCantidadTarjeta(${prod.id}, -1)">-</button>
+                                <span id="qty-${prod.id}" class="qty-value">1</span>
+                                <button type="button" class="qty-btn" onclick="cambiarCantidadTarjeta(${prod.id}, 1)">+</button>
+                            </div>
+                            <button type="button" class="btn btn-cart" onclick="agregarAlCarrito(${prod.id})">🛒 Añadir</button>
                         </div>
                     </div>
                 `;
@@ -582,13 +618,24 @@
 
         function agregarAlCarrito(id) {
             const producto = productos.find(p => p.id === id);
-            carrito.push(producto);
+            const spanCantidad = document.getElementById(`qty-${id}`);
+            const cantidad = parseInt(spanCantidad.innerText);
+
+            const existente = carrito.find(item => item.id === id);
+            if (existente) {
+                existente.cantidad += cantidad;
+            } else {
+                carrito.push({ ...producto, cantidad: cantidad });
+            }
+
+            spanCantidad.innerText = '1';
             actualizarCarritoUI();
-            mostrarNotificacion(`Se guardó "${producto.nombre}" en el carrito`);
+            mostrarNotificacion(`Se añadió ${cantidad} x "${producto.nombre}" al carrito`);
         }
 
         function actualizarCarritoUI() {
-            document.getElementById('cart-count').innerText = carrito.length;
+            const totalUnidades = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+            document.getElementById('cart-count').innerText = totalUnidades;
             
             const contenedorItems = document.getElementById('cartItems');
             contenedorItems.innerHTML = '';
@@ -601,12 +648,13 @@
 
             let total = 0;
             carrito.forEach((item, index) => {
-                total += item.precio;
+                const subtotal = item.precio * item.cantidad;
+                total += subtotal;
                 const div = document.createElement('div');
                 div.className = 'cart-item';
                 div.innerHTML = `
-                    <span>${item.nombre}</span>
-                    <span>S/ ${item.precio} <button onclick="eliminarDelCarrito(${index})" style="background:none;border:none;color:red;cursor:pointer;margin-left:8px;">✕</button></span>
+                    <span><strong>${item.cantidad}x</strong> ${item.nombre}</span>
+                    <span>S/ ${subtotal.toFixed(2)} <button onclick="eliminarDelCarrito(${index})" style="background:none;border:none;color:red;cursor:pointer;margin-left:8px;">✕</button></span>
                 `;
                 contenedorItems.appendChild(div);
             });
@@ -638,8 +686,9 @@
             let total = 0;
 
             carrito.forEach((item, idx) => {
-                mensaje += `${idx + 1}. ${item.nombre} - S/ ${item.precio}\n`;
-                total += item.precio;
+                const subtotal = item.precio * item.cantidad;
+                mensaje += `${idx + 1}. ${item.cantidad}x ${item.nombre} - S/ ${subtotal.toFixed(2)}\n`;
+                total += subtotal;
             });
 
             mensaje += `\n*Total referencial: S/ ${total.toFixed(2)}*`;
@@ -653,26 +702,3 @@
     </script>
 </body>
 </html>
-    
-         
-   
-    
-       
-        
- 
-         
-
-
-            
-    
-            
-            
-  
-  
-
-
-
-
-
-           
-
