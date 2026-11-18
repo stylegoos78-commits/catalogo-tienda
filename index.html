@@ -734,7 +734,7 @@
             }
 
             const modalidad = document.getElementById('modalidadTrato').value;
-            let mensaje = "Hola, quiero realizar el siguiente pedido en *Manito Herramientas*:\n\n";
+            let mensaje = "Hola *Manito Herramientas* 🔧, quiero realizar el siguiente pedido:\n\n";
             let total = 0;
 
             carrito.forEach((item, idx) => {
@@ -743,8 +743,18 @@
                 total += subtotal;
             });
 
-            mensaje += `\n*Total referencial: S/ ${total.toFixed(2)}*`;
-            mensaje += `\n*Modalidad elegida:* ${modalidad}`;
+            mensaje += `\n*Total referencial: S/ ${total.toFixed(2)}*\n`;
+            mensaje += `*Modalidad:* ${modalidad}\n\n`;
+
+            if (modalidad.includes("Opción 1")) {
+                mensaje += "📋 *Mis datos para coordinar la entrega:*\n";
+                mensaje += "📍 *Distrito / Punto de entrega:* \n";
+                mensaje += "💳 *Medio de pago (Yape / Plin / Efectivo):* ";
+            } else {
+                mensaje += "♻️ *Mis datos para cotizar el Plan Renove:*\n";
+                mensaje += "📍 *Distrito / Ubicación:* \n";
+                mensaje += "📦 *Cantidad aproximada de material (ej. balde, saco, máquinas):* ";
+            }
 
             const url = `https://wa.me/${TELEFONO_WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
             window.open(url, '_blank');
