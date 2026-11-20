@@ -74,7 +74,7 @@
             padding: 0 1.5rem;
         }
 
-        /* Sección superior de modalidades en rectángulos larguitos */
+        /* Sección superior de modalidades */
         .deal-section-top {
             margin-bottom: 2rem;
             background: white;
@@ -98,13 +98,8 @@
         }
         .deal-options-row {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
-        }
-        @media (max-width: 768px) {
-            .deal-options-row {
-                grid-template-columns: 1fr;
-            }
         }
         .deal-card-rect {
             background: #f8fafc;
@@ -151,6 +146,12 @@
             border-top: 1px dashed #cbd5e1;
             font-size: 0.78rem;
             color: #475569;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+        .deal-examples-mini p {
+            margin-top: 0 !important;
         }
 
         /* Barra de búsqueda alargada y armónica */
@@ -302,6 +303,17 @@
         }
 
         /* Adaptación para celulares (2 columnas tipo vitrina) */
+        @media (max-width: 768px) {
+            .deal-options-row {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+            .deal-examples-mini {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.4rem;
+            }
+        }
+
         @media (max-width: 600px) {
             header {
                 padding-bottom: 4.5rem;
@@ -320,7 +332,7 @@
                 margin: 1.2rem auto;
             }
             .deal-section-top {
-                padding: 1rem;
+                padding: 0.85rem;
                 margin-bottom: 1.2rem;
             }
             .deal-header-top h2 {
@@ -329,8 +341,24 @@
             .deal-header-top p {
                 font-size: 0.8rem;
             }
+            .deal-options-row {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.65rem;
+            }
             .deal-card-rect {
-                padding: 0.9rem;
+                padding: 0.75rem;
+            }
+            .deal-card-rect h3 {
+                font-size: 0.92rem;
+            }
+            .deal-card-rect p {
+                font-size: 0.74rem;
+                line-height: 1.3;
+            }
+            .deal-examples-mini {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.35rem;
+                font-size: 0.7rem;
             }
             .search-container {
                 margin-bottom: 1.2rem;
@@ -521,7 +549,7 @@
 
     <div class="container">
 
-        <!-- Sección superior: ¿Cómo cerramos el trato? (Rectángulos larguitos) -->
+        <!-- Sección superior: ¿Cómo cerramos el trato? -->
         <section class="deal-section-top">
             <div class="deal-header-top">
                 <h2>🤝 ¿Cómo cerramos el trato?</h2>
@@ -543,7 +571,7 @@
                     </div>
                     <div class="deal-examples-mini">
                         <p><strong>✅ Recibimos:</strong> Fierro viejo, discos gastados, chatarra pesada.</p>
-                        <p style="margin-top: 4px; color: #b91c1c;"><strong>❌ No:</strong> Plástico, cartón, madera ni desmonte.</p>
+                        <p style="color: #b91c1c;"><strong>❌ No:</strong> Plástico, cartón, madera ni desmonte.</p>
                     </div>
                 </div>
             </div>
@@ -654,7 +682,7 @@
         function cambiarCantidadTarjeta(id, cambio) {
             const span = document.getElementById(`qty-${id}`);
             let cantidad = parseInt(span.innerText) + cambio;
-            if (cantidad < 1) cantidad = 1;
+            if (cantidad < 0) cantidad = 0;
             span.innerText = cantidad;
         }
 
@@ -683,7 +711,7 @@
                         <div class="btn-actions">
                             <div class="qty-selector">
                                 <button type="button" class="qty-btn" onclick="cambiarCantidadTarjeta(${prod.id}, -1)">-</button>
-                                <span id="qty-${prod.id}" class="qty-value">1</span>
+                                <span id="qty-${prod.id}" class="qty-value">0</span>
                                 <button type="button" class="qty-btn" onclick="cambiarCantidadTarjeta(${prod.id}, 1)">+</button>
                             </div>
                             <button type="button" class="btn btn-cart" onclick="agregarAlCarrito(${prod.id})">🛒 Añadir</button>
@@ -705,6 +733,11 @@
             const spanCantidad = document.getElementById(`qty-${id}`);
             const cantidad = parseInt(spanCantidad.innerText);
 
+            if (cantidad <= 0) {
+                mostrarNotificacion("Selecciona al menos 1 unidad antes de añadir");
+                return;
+            }
+
             const existente = carrito.find(item => item.id === id);
             if (existente) {
                 existente.cantidad += cantidad;
@@ -712,7 +745,7 @@
                 carrito.push({ ...producto, cantidad: cantidad });
             }
 
-            spanCantidad.innerText = '1';
+            spanCantidad.innerText = '0';
             actualizarCarritoUI();
             mostrarNotificacion(`Se añadió ${cantidad} x "${producto.nombre}" al carrito`);
         }
