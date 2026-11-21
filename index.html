@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manito Herramientas - Catálogo Digital</title>
+    <title>GAMBITO HERRAMIENTAS - Catálogo Digital</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -73,25 +73,107 @@
             margin: 2rem auto;
             padding: 0 1.5rem;
         }
+
+        /* Sección superior de modalidades en rectángulos larguitos */
+        .deal-section-top {
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+        .deal-header-top {
+            text-align: center;
+            margin-bottom: 1.2rem;
+        }
+        .deal-header-top h2 {
+            font-size: 1.35rem;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+        .deal-header-top p {
+            color: var(--gray);
+            font-size: 0.88rem;
+        }
+        .deal-options-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        @media (max-width: 768px) {
+            .deal-options-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        .deal-card-rect {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .deal-card-rect.highlight {
+            border-color: var(--accent);
+            background: #fffbeb;
+        }
+        .deal-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            width: fit-content;
+        }
+        .deal-card-rect.highlight .deal-badge {
+            background: var(--accent);
+            color: #0f172a;
+        }
+        .deal-card-rect h3 {
+            font-size: 1.05rem;
+            color: var(--primary);
+            margin-bottom: 0.4rem;
+        }
+        .deal-card-rect p {
+            font-size: 0.83rem;
+            color: var(--text);
+            line-height: 1.4;
+        }
+        .deal-examples-mini {
+            margin-top: 0.6rem;
+            padding-top: 0.6rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.78rem;
+            color: #475569;
+        }
+
+        /* Barra de búsqueda alargada y armónica */
         .search-container {
             margin-bottom: 2rem;
-            display: flex;
-            justify-content: center;
+            width: 100%;
         }
         .search-box {
             width: 100%;
-            max-width: 500px;
-            padding: 0.9rem 1.2rem;
+            padding: 0.95rem 1.4rem;
             font-size: 1rem;
             border: 1px solid #cbd5e1;
             border-radius: 12px;
             outline: none;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            transition: border-color 0.2s;
+            background: white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            transition: all 0.2s ease;
         }
         .search-box:focus {
             border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
         }
+
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -237,6 +319,26 @@
                 padding: 0 0.75rem;
                 margin: 1.2rem auto;
             }
+            .deal-section-top {
+                padding: 1rem;
+                margin-bottom: 1.2rem;
+            }
+            .deal-header-top h2 {
+                font-size: 1.15rem;
+            }
+            .deal-header-top p {
+                font-size: 0.8rem;
+            }
+            .deal-card-rect {
+                padding: 0.9rem;
+            }
+            .search-container {
+                margin-bottom: 1.2rem;
+            }
+            .search-box {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
             .grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 0.75rem;
@@ -280,81 +382,6 @@
                 padding: 0.55rem;
                 font-size: 0.82rem;
             }
-            .deal-section {
-                padding: 1.5rem 1rem;
-            }
-        }
-
-        /* Sección de modalidades de compra / cierre de trato */
-        .deal-section {
-            margin-top: 4rem;
-            background: white;
-            border-radius: 20px;
-            padding: 2.5rem 2rem;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-        }
-        .deal-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .deal-header h2 {
-            font-size: 1.6rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        .deal-header p {
-            color: var(--gray);
-            font-size: 0.95rem;
-        }
-        .deal-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-        .deal-card {
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 1.5rem;
-            transition: border-color 0.2s;
-        }
-        .deal-card.highlight {
-            border-color: var(--accent);
-            background: #fffbeb;
-        }
-        .deal-badge {
-            display: inline-block;
-            background: var(--primary);
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 0.3rem 0.75rem;
-            border-radius: 999px;
-            margin-bottom: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .deal-card.highlight .deal-badge {
-            background: var(--accent);
-            color: #0f172a;
-        }
-        .deal-card h3 {
-            font-size: 1.2rem;
-            color: var(--primary);
-            margin-bottom: 0.6rem;
-        }
-        .deal-card p {
-            font-size: 0.9rem;
-            color: var(--text);
-            line-height: 1.5;
-        }
-        .deal-examples {
-            margin-top: 0.8rem;
-            padding-top: 0.8rem;
-            border-top: 1px dashed #cbd5e1;
-            font-size: 0.85rem;
-            color: #475569;
         }
 
         /* Notificación Toast */
@@ -485,7 +512,7 @@
 <body>
 
     <header>
-        <h1>Manito <span>Herramientas</span></h1>
+        <h1>GAMBITO <span>HERRAMIENTAS</span></h1>
         <p>Catálogo Digital</p>
         <button class="cart-btn-header" onclick="abrirCarrito()">
             🛒 Carrito (<span id="cart-count">0</span>)
@@ -493,36 +520,41 @@
     </header>
 
     <div class="container">
-        <div class="search-container">
-            <input type="text" id="searchInput" class="search-box" placeholder="🔍 Buscar llave, alicate, martillo..." oninput="filtrarProductos()">
-        </div>
 
-        <div id="catalogo" class="grid"></div>
-
-        <!-- Sección: Cómo cerramos trato -->
-        <section class="deal-section">
-            <div class="deal-header">
+        <!-- Sección superior: ¿Cómo cerramos el trato? (Rectángulos larguitos) -->
+        <section class="deal-section-top">
+            <div class="deal-header-top">
                 <h2>🤝 ¿Cómo cerramos el trato?</h2>
-                <p>Elige la modalidad que más te convenga para llevarte tus herramientas</p>
+                <p>Elige la modalidad que más te convenga</p>
             </div>
-            <div class="deal-options">
-                <div class="deal-card">
-                    <span class="deal-badge">Opción 1</span>
-                    <h3>💵 Compra directa con dinero</h3>
-                    <p>Adquiere cualquiera de nuestras herramientas al precio publicado mediante pago en efectivo, Yape o Plin.</p>
+            <div class="deal-options-row">
+                <div class="deal-card-rect">
+                    <div>
+                        <span class="deal-badge">Opción 1</span>
+                        <h3>💵 Compra directa</h3>
+                        <p>Adquiere tus herramientas al precio publicado con pago en efectivo, Yape o Plin.</p>
+                    </div>
                 </div>
-                <div class="deal-card highlight"> 
-                    <span class="deal-badge">Opción 2 • ¡Ahorra!</span>
-                    <h3>♻️ Plan Renove: Parte de pago con equipos en desuso</h3>
-                    <p>Aceptamos tus materiales en desuso como forma de pago (total o parcial) para que te salga más económico renovar tus herramientas.</p>
-                    <div class="deal-examples">
-                        <p><strong>✅ ¿Qué recibimos?</strong> Fierro viejo, discos de corte gastados, herramientas malogradas, repuestos metálicos y chatarra pesada en general.</p>
-                        <p style="margin-top: 8px; color: #b91c1c;"><strong>❌ No recibimos:</strong> Plástico, cartón, papel, madera, vidrio, llantas ni desmonte.</p>
-                        <p style="margin-top: 8px;"><em>¡Cotizamos tus metales al instante por WhatsApp!</em></p>
+                <div class="deal-card-rect highlight">
+                    <div>
+                        <span class="deal-badge">Opción 2 • ¡Ahorra!</span>
+                        <h3>♻️ Plan Renove</h3>
+                        <p>Usa tus equipos y metales en desuso como parte de pago.</p>
+                    </div>
+                    <div class="deal-examples-mini">
+                        <p><strong>✅ Recibimos:</strong> Fierro viejo, discos gastados, chatarra pesada.</p>
+                        <p style="margin-top: 4px; color: #b91c1c;"><strong>❌ No:</strong> Plástico, cartón, madera ni desmonte.</p>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Barra de búsqueda alargada y armónica -->
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-box" placeholder="🔍 Buscar llave, alicate, martillo, sierra..." oninput="filtrarProductos()">
+        </div>
+
+        <div id="catalogo" class="grid"></div>
     </div>
 
     <!-- Notificación suave tipo Toast -->
@@ -543,7 +575,7 @@
                 <label for="modalidadTrato">¿Cómo deseas cerrar el trato?</label>
                 <select id="modalidadTrato">
                     <option value="Opción 1: Pago con dinero (Efectivo / Yape / Plin)">💵 Opción 1: Pago con dinero</option>
-                    <option value="Opción 2: Plan Renove / Parte de pago con materiales en desuso (fierro, discos gastados, etc.)">♻️ Opción 2: Plan Renove (fierro, discos, etc.)</option>
+                    <option value="Opción 2: Plan Renove / Parte de pago con materiales en desuso">♻️ Opción 2: Plan Renove (Parte de pago)</option>
                 </select>
             </div>
 
@@ -734,7 +766,7 @@
             }
 
             const modalidad = document.getElementById('modalidadTrato').value;
-            let mensaje = "Hola, quiero realizar el siguiente pedido en *Manito Herramientas*:\n\n";
+            let mensaje = "Hola *Manito Herramientas* 🔧, quiero realizar el siguiente pedido:\n\n";
             let total = 0;
 
             carrito.forEach((item, idx) => {
@@ -743,8 +775,8 @@
                 total += subtotal;
             });
 
-            mensaje += `\n*Total referencial: S/ ${total.toFixed(2)}*`;
-            mensaje += `\n*Modalidad elegida:* ${modalidad}`;
+            mensaje += `\n*Total referencial: S/ ${total.toFixed(2)}*\n`;
+            mensaje += `*Modalidad:* ${modalidad}`;
 
             const url = `https://wa.me/${TELEFONO_WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
             window.open(url, '_blank');
