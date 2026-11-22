@@ -10,9 +10,9 @@
     :root {
       --primary: #1e293b;
       --primary-hover: #334155;
-      --accent: #f59e0b;
-      --accent-hover: #d97706;
-      --accent-soft: #fffbeb;
+      --accent: #ff5500;
+      --accent-hover: #e64a00;
+      --accent-soft: #fff3ed;
       --bg: #f8fafc;
       --card-bg: #ffffff;
       --text: #334155;
@@ -97,7 +97,7 @@
       top: 50%;
       transform: translateY(-50%);
       background: var(--accent);
-      color: var(--text-dark);
+      color: #ffffff;
       border: none;
       padding: 0.65rem 1rem;
       border-radius: 11px;
@@ -107,7 +107,7 @@
       align-items: center;
       gap: 0.45rem;
       font-size: 0.95rem;
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+      box-shadow: 0 4px 12px rgba(255, 85, 0, 0.35);
       transition: transform 0.15s ease, background 0.15s ease;
     }
 
@@ -164,7 +164,7 @@
 
     .search-box:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.16);
+      box-shadow: 0 0 0 4px rgba(255, 85, 0, 0.16);
     }
 
     .brands-row {
@@ -217,7 +217,7 @@
     .brand-circle-btn.active {
       background: var(--primary);
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.22), 0 6px 14px rgba(15, 23, 42, 0.14);
+      box-shadow: 0 0 0 3px rgba(255, 85, 0, 0.22), 0 6px 14px rgba(15, 23, 42, 0.14);
       transform: translateY(-2px);
     }
 
@@ -249,7 +249,7 @@
 
     .card:hover {
       transform: translateY(-4px);
-      border-color: rgba(245, 158, 11, 0.65);
+      border-color: rgba(255, 85, 0, 0.65);
       box-shadow: 0 16px 30px -8px rgba(15, 23, 42, 0.12);
     }
 
@@ -308,7 +308,7 @@
 
     .gallery-nav:hover {
       background: var(--accent);
-      color: var(--text-dark);
+      color: #ffffff;
     }
 
     .gallery-prev { left: 8px; }
@@ -369,7 +369,7 @@
       font-weight: 800;
       color: var(--text-dark);
       background: var(--accent-soft);
-      border: 1px solid #fde68a;
+      border: 1px solid #ffcdb2;
       padding: 0.2rem 0.6rem;
       border-radius: 8px;
       display: inline-block;
@@ -441,7 +441,7 @@
 
     .btn-cart:hover {
       background-color: var(--accent);
-      color: var(--text-dark);
+      color: #ffffff;
     }
 
     .btn-wa {
@@ -453,7 +453,6 @@
       background-color: var(--whatsapp-hover);
     }
 
-    /* Carrito en esquina superior derecha en celular sin tocar el lema */
     @media (max-width: 640px) {
       header { padding: 0.9rem 0.75rem; }
       .header-inner {
@@ -655,7 +654,7 @@
     .deal-choice-btn.active {
       background: var(--accent);
       border-color: var(--accent);
-      color: var(--text-dark);
+      color: #ffffff;
     }
 
     .deal-spec-banner {
@@ -673,7 +672,7 @@
 
     .deal-spec-banner.renove-active {
       background: var(--accent-soft);
-      border-color: #fde68a;
+      border-color: #ffcdb2;
       border-left-color: var(--accent);
     }
 
@@ -1024,4 +1023,3 @@
   </script>
 </body>
 </html>
-
