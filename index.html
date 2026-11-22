@@ -65,7 +65,6 @@
       padding: 0 4rem;
     }
 
-    /* Tipografía ferretera sólida y ancha para METAL K */
     .brand-title {
       font-family: 'Chakra Petch', sans-serif;
       font-size: 2.15rem;
@@ -129,7 +128,7 @@
       position: relative;
       width: 100%;
       max-width: 600px;
-      margin: 0 auto 1.15rem;
+      margin: 0 auto 1.25rem;
     }
 
     .search-icon {
@@ -157,45 +156,6 @@
     .search-box:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.16);
-    }
-
-    /* Franja de confianza y valor para invitar a comprar */
-    .perks-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.75rem;
-      margin-bottom: 1.35rem;
-    }
-
-    .perk-pill {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--accent);
-      border-radius: 12px;
-      padding: 0.7rem 0.9rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
-    }
-
-    .perk-icon {
-      font-size: 1.1rem;
-      flex-shrink: 0;
-    }
-
-    .perk-text strong {
-      display: block;
-      font-size: 0.8rem;
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    .perk-text span {
-      display: block;
-      font-size: 0.72rem;
-      color: var(--gray);
-      line-height: 1.25;
     }
 
     .brands-row {
@@ -408,13 +368,6 @@
       flex-grow: 1;
     }
 
-    .price-row {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-bottom: 0.85rem;
-    }
-
     .price {
       font-size: 1.28rem;
       font-weight: 800;
@@ -423,12 +376,9 @@
       border: 1px solid #fde68a;
       padding: 0.2rem 0.6rem;
       border-radius: 8px;
-    }
-
-    .renove-mini-tag {
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--primary);
+      display: inline-block;
+      align-self: flex-start;
+      margin-bottom: 0.85rem;
     }
 
     .btn-actions {
@@ -507,13 +457,6 @@
       background-color: var(--whatsapp-hover);
     }
 
-    @media (max-width: 780px) {
-      .perks-strip {
-        grid-template-columns: 1fr;
-        gap: 0.5rem;
-      }
-    }
-
     @media (max-width: 640px) {
       header { padding: 1rem 0.85rem; }
       .brand-center-box { padding: 0 2.9rem; }
@@ -521,9 +464,6 @@
       .brand-tagline { font-size: 0.65rem; }
       .cart-btn-header { padding: 0.52rem 0.75rem; font-size: 0.82rem; }
       .container { padding: 0 0.75rem; margin: 1.1rem auto; }
-      .perk-pill { padding: 0.55rem 0.7rem; }
-      .perk-text strong { font-size: 0.75rem; }
-      .perk-text span { font-size: 0.68rem; }
       .brand-circle-btn { width: 55px; height: 55px; }
       .brand-circle-btn span { font-size: 0.58rem; }
       .grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
@@ -538,9 +478,7 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
       }
-      .price-row { flex-direction: column; align-items: flex-start; gap: 0.25rem; margin-bottom: 0.6rem; }
-      .price { font-size: 1.05rem; padding: 0.15rem 0.45rem; }
-      .renove-mini-tag { font-size: 0.65rem; }
+      .price { font-size: 1.05rem; padding: 0.15rem 0.45rem; margin-bottom: 0.6rem; }
       .btn-actions { flex-direction: column; gap: 0.4rem; }
       .qty-selector { width: 100%; justify-content: space-between; }
       .qty-btn { padding: 0.4rem 0.75rem; }
@@ -749,30 +687,6 @@
       <input type="text" id="searchInput" class="search-box" placeholder="Buscar herramienta, modelo o marca..." oninput="filtrarProductos()" />
     </div>
 
-    <div class="perks-strip">
-      <div class="perk-pill">
-        <span class="perk-icon">♻️</span>
-        <div class="perk-text">
-          <strong>Plan Renove activo</strong>
-          <span>Parte de pago con fierro y chachina</span>
-        </div>
-      </div>
-      <div class="perk-pill">
-        <span class="perk-icon">⚡</span>
-        <div class="perk-text">
-          <strong>Trato directo por WhatsApp</strong>
-          <span>Cotización rápida sin rodeos</span>
-        </div>
-      </div>
-      <div class="perk-pill">
-        <span class="perk-icon">🛠️</span>
-        <div class="perk-text">
-          <strong>Listas para el taller</strong>
-          <span>Modelos elegidos para trabajo real</span>
-        </div>
-      </div>
-    </div>
-
     <div class="brands-row" id="brandsRow">
       <button type="button" class="brand-circle-btn all-circle active" onclick="seleccionarMarca('Todas', this)"><span>Todas</span></button>
       <button type="button" class="brand-circle-btn" onclick="seleccionarMarca('Makita', this)"><span>Makita</span></button>
@@ -948,10 +862,7 @@
           '<div class="card-body">' +
             '<h3 class="card-title">' + prod.nombre + "</h3>" +
             '<p class="card-desc">' + prod.descripcion + "</p>" +
-            '<div class="price-row">' +
-              '<span class="price">S/ ' + prod.precio + "</span>" +
-              '<span class="renove-mini-tag">♻️ Acepta Renove</span>' +
-            "</div>" +
+            '<div class="price">S/ ' + prod.precio + "</div>" +
             '<div class="btn-actions">' +
               '<div class="qty-selector">' +
                 '<button type="button" class="qty-btn" onclick="cambiarCantidadTarjeta(' + prod.id + ', -1)">-</button>' +
