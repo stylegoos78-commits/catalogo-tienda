@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="catalog-status" id="metaCatalogStatus" content="Mostrando Todas las herramientas (orden aleatorio) - 8 productos" />
   <title>METALK - Tu tienda de recambio y herramientas de confianza</title>
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
@@ -90,7 +91,6 @@
       line-height: 1.25;
     }
 
-    /* Botón amarillo con carrito en negro sólido */
     .cart-btn-header {
       position: absolute;
       right: 0;
@@ -173,7 +173,7 @@
       justify-content: flex-start;
       gap: 0.85rem;
       flex-wrap: wrap;
-      margin-bottom: 1.15rem;
+      margin-bottom: 1.35rem;
     }
 
     .brand-circle-btn {
@@ -228,19 +228,6 @@
     .brand-circle-btn.all-circle.active {
       background: #475569;
       border-color: var(--accent);
-    }
-
-    .catalog-status {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-      font-size: 0.84rem;
-      color: var(--gray);
-    }
-
-    .catalog-status strong {
-      color: var(--primary);
     }
 
     .grid {
@@ -466,42 +453,42 @@
       background-color: var(--whatsapp-hover);
     }
 
+    /* Carrito en esquina superior derecha en celular sin tocar el lema */
     @media (max-width: 640px) {
-      header { padding: 0.95rem 0.85rem; }
+      header { padding: 0.9rem 0.75rem; }
       .header-inner {
-        flex-direction: column;
-        gap: 0.65rem;
-        min-height: auto;
+        min-height: 54px;
       }
       .brand-center-box {
-        width: 100%;
-        padding: 0 0.25rem;
+        padding: 0 4.35rem;
       }
       .brand-title {
-        font-size: 1.95rem;
-        letter-spacing: 3px;
+        font-size: 1.65rem;
+        letter-spacing: 2.2px;
       }
       .brand-tagline {
-        font-size: 0.72rem;
+        font-size: 0.66rem;
         margin-top: 4px;
-        max-width: 100%;
+        line-height: 1.2;
       }
       .cart-btn-header {
-        position: static;
+        right: 0;
+        top: 0;
         transform: none;
-        padding: 0.48rem 0.9rem;
-        font-size: 0.85rem;
+        padding: 0.45rem 0.65rem;
+        font-size: 0.82rem;
         border-radius: 10px;
+        gap: 0.3rem;
       }
       .cart-btn-header:hover {
         transform: translateY(-1px);
       }
       .cart-btn-header:active {
-        transform: scale(0.96);
+        transform: scale(0.95);
       }
       .cart-svg-black {
-        width: 18px;
-        height: 18px;
+        width: 17px;
+        height: 17px;
       }
       .container { padding: 0 0.75rem; margin: 1.1rem auto; }
       .brand-circle-btn { width: 55px; height: 55px; }
@@ -738,11 +725,6 @@
       <button type="button" class="brand-circle-btn" onclick="seleccionarMarca('Truper', this)"><span>Truper</span></button>
     </div>
 
-    <div class="catalog-status">
-      <span id="statusText">Mostrando <strong>Todas</strong> las herramientas (orden aleatorio)</span>
-      <span id="countText"></span>
-    </div>
-
     <div id="catalogo" class="grid"></div>
   </div>
 
@@ -871,9 +853,7 @@
 
     function renderizarProductos(lista) {
       const contenedor = document.getElementById("catalogo");
-      const countText = document.getElementById("countText");
       contenedor.innerHTML = "";
-      countText.innerText = lista.length + " producto" + (lista.length === 1 ? "" : "s");
 
       if (lista.length === 0) {
         contenedor.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #64748b; padding: 2rem;">No se encontraron herramientas.</p>';
@@ -921,7 +901,7 @@
 
     function filtrarProductos() {
       const texto = document.getElementById("searchInput").value.toLowerCase().trim();
-      const statusText = document.getElementById("statusText");
+      const metaStatus = document.getElementById("metaCatalogStatus");
 
       let base = marcaActiva === "Todas"
         ? mezclarAlAzar(productos)
@@ -935,9 +915,10 @@
         );
       }
 
-      statusText.innerHTML = marcaActiva === "Todas"
-        ? (texto ? "Mostrando resultados en <strong>Todas</strong> las marcas" : "Mostrando <strong>Todas</strong> las herramientas (orden aleatorio)")
-        : "Filtrando por marca: <strong>" + marcaActiva + "</strong>";
+      if (metaStatus) {
+        const etiquetaMarca = marcaActiva === "Todas" ? "Todas las herramientas (orden aleatorio)" : "Marca: " + marcaActiva;
+        metaStatus.setAttribute("content", etiquetaMarca + " - " + base.length + " productos");
+      }
 
       renderizarProductos(base);
     }
@@ -1043,3 +1024,4 @@
   </script>
 </body>
 </html>
+
