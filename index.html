@@ -53,7 +53,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 58px;
+      min-height: 64px;
     }
 
     .brand-center-box {
@@ -62,14 +62,15 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 0 4rem;
+      padding: 0 5.5rem;
+      max-width: 100%;
     }
 
     .brand-title {
       font-family: 'Chakra Petch', sans-serif;
-      font-size: 2.15rem;
+      font-size: 2.5rem;
       font-weight: 700;
-      letter-spacing: 3.5px;
+      letter-spacing: 4px;
       line-height: 1;
       color: #ffffff;
       text-transform: uppercase;
@@ -82,40 +83,55 @@
     }
 
     .brand-tagline {
-      font-size: 0.76rem;
+      font-size: 0.78rem;
       font-weight: 500;
       color: #cbd5e1;
-      margin-top: 5px;
+      margin-top: 6px;
       line-height: 1.25;
     }
 
+    /* Botón de carrito oscuro/negro para destacar sin perderse */
     .cart-btn-header {
       position: absolute;
       right: 0;
       top: 50%;
       transform: translateY(-50%);
-      background: var(--accent);
-      color: var(--text-dark);
-      border: none;
-      padding: 0.65rem 1.05rem;
-      border-radius: 11px;
+      background: #0f172a;
+      color: #ffffff;
+      border: 1.5px solid rgba(245, 158, 11, 0.55);
+      padding: 0.65rem 1rem;
+      border-radius: 12px;
       font-weight: 800;
       cursor: pointer;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 0.45rem;
       font-size: 0.92rem;
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
-      transition: transform 0.15s ease, background 0.15s ease;
+      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.35);
+      transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
     }
 
     .cart-btn-header:hover {
-      background: var(--accent-hover);
+      background: #020617;
+      border-color: var(--accent);
       transform: translateY(calc(-50% - 1px));
     }
 
     .cart-btn-header:active {
       transform: translateY(-50%) scale(0.95);
+    }
+
+    .cart-icon-dark {
+      width: 24px;
+      height: 24px;
+      border-radius: 7px;
+      background: #020617;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      border: 1px solid rgba(255, 255, 255, 0.14);
     }
 
     .container {
@@ -457,12 +473,40 @@
       background-color: var(--whatsapp-hover);
     }
 
+    /* Ajuste en celular para evitar choques entre lema y carrito */
     @media (max-width: 640px) {
-      header { padding: 1rem 0.85rem; }
-      .brand-center-box { padding: 0 2.9rem; }
-      .brand-title { font-size: 1.55rem; letter-spacing: 2.2px; }
-      .brand-tagline { font-size: 0.65rem; }
-      .cart-btn-header { padding: 0.52rem 0.75rem; font-size: 0.82rem; }
+      header { padding: 0.95rem 0.85rem; }
+      .header-inner {
+        flex-direction: column;
+        gap: 0.65rem;
+        min-height: auto;
+      }
+      .brand-center-box {
+        width: 100%;
+        padding: 0 0.25rem;
+      }
+      .brand-title {
+        font-size: 1.95rem;
+        letter-spacing: 3px;
+      }
+      .brand-tagline {
+        font-size: 0.72rem;
+        margin-top: 4px;
+        max-width: 100%;
+      }
+      .cart-btn-header {
+        position: static;
+        transform: none;
+        padding: 0.45rem 0.9rem;
+        font-size: 0.82rem;
+        border-radius: 10px;
+      }
+      .cart-btn-header:hover {
+        transform: translateY(-1px);
+      }
+      .cart-btn-header:active {
+        transform: scale(0.96);
+      }
       .container { padding: 0 0.75rem; margin: 1.1rem auto; }
       .brand-circle-btn { width: 55px; height: 55px; }
       .brand-circle-btn span { font-size: 0.58rem; }
@@ -676,7 +720,8 @@
         <p class="brand-tagline">tu tienda de recambio y herramientas de confianza</p>
       </div>
       <button type="button" class="cart-btn-header" onclick="abrirCarrito()">
-        🛒 <span id="cart-count">0</span>
+        <span class="cart-icon-dark">🛒</span>
+        <span id="cart-count">0</span>
       </button>
     </div>
   </header>
