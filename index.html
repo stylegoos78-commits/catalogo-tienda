@@ -40,7 +40,6 @@
       padding-bottom: 4.5rem;
     }
 
-    /* Encabezado estilo ferretería técnica */
     header {
       background: var(--primary);
       color: #ffffff;
@@ -532,7 +531,6 @@
       background-color: var(--whatsapp-hover);
     }
 
-    /* Celular: carrito arriba a la derecha sin chocar con marca ni lema */
     @media (max-width: 768px) {
       .topbar-inner {
         padding: 0.38rem 0.85rem;
@@ -832,7 +830,7 @@
 
   <div class="container">
     <div class="brands-row" id="brandsRow">
-      <button type="button" class="brand-circle-btn all-circle active" onclick="seleccionarMarca('Todas', this)"><span>Todas</span></button>
+      <button type="button" id="btnMarcaTodas" class="brand-circle-btn all-circle active" onclick="seleccionarMarca('Todas', this)"><span>Todas</span></button>
       <button type="button" class="brand-circle-btn" onclick="seleccionarMarca('Makita', this)"><span>Makita</span></button>
       <button type="button" class="brand-circle-btn" onclick="seleccionarMarca('Bosch', this)"><span>Bosch</span></button>
       <button type="button" class="brand-circle-btn" onclick="seleccionarMarca('Stanley', this)"><span>Stanley</span></button>
@@ -919,9 +917,21 @@
 
     function seleccionarMarca(marca, btnElemento) {
       marcaActiva = marca;
+      if (marca === "Todas") {
+        const inputBusqueda = document.getElementById("searchInput");
+        if (inputBusqueda) inputBusqueda.value = "";
+      }
       document.querySelectorAll(".brand-circle-btn").forEach(btn => btn.classList.remove("active"));
       if (btnElemento) btnElemento.classList.add("active");
       filtrarProductos();
+      if (marca === "Todas") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+
+    function irATodasLasHerramientas() {
+      const btnTodas = document.getElementById("btnMarcaTodas");
+      seleccionarMarca("Todas", btnTodas);
     }
 
     function seleccionarModalidadTrato(valor, btnElemento) {
