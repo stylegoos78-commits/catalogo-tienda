@@ -517,9 +517,23 @@
       color: #ffffff;
     }
 
+    .btn-cart-icon {
+      width: 19px;
+      height: 19px;
+      display: block;
+      flex-shrink: 0;
+      color: var(--accent);
+      transition: color 0.2s ease, transform 0.15s ease;
+    }
+
     .btn-cart:hover {
       background-color: var(--accent);
       color: #ffffff;
+    }
+
+    .btn-cart:hover .btn-cart-icon {
+      color: #ffffff;
+      transform: scale(1.06);
     }
 
     .btn-wa {
@@ -605,6 +619,15 @@
       .qty-selector { width: 100%; justify-content: space-between; }
       .qty-btn { padding: 0.4rem 0.75rem; }
       .btn { width: 100%; padding: 0.55rem; font-size: 0.82rem; }
+      .btn-cart {
+        background-color: var(--accent);
+        color: #ffffff;
+      }
+      .btn-cart-icon {
+        width: 16px;
+        height: 16px;
+        color: #ffffff;
+      }
     }
 
     .toast-notification {
@@ -981,6 +1004,14 @@
       span.innerText = cantidad;
     }
 
+    const SVG_CARRITO_ANADIR =
+      '<svg class="btn-cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+        '<circle cx="9" cy="20" r="1.6" fill="currentColor" stroke="none"/>' +
+        '<circle cx="18" cy="20" r="1.6" fill="currentColor" stroke="none"/>' +
+        '<path d="M2 3h3l2.2 11.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 1.9-1.4L22 7H6.2"/>' +
+        '<path d="M13 8.5v4M11 10.5h4"/>' +
+      "</svg>";
+
     function renderizarProductos(lista) {
       const contenedor = document.getElementById("catalogo");
       contenedor.innerHTML = "";
@@ -1022,7 +1053,7 @@
                 '<span id="qty-' + prod.id + '" class="qty-value">1</span>' +
                 '<button type="button" class="qty-btn" onclick="cambiarCantidadTarjeta(' + prod.id + ', 1)">+</button>' +
               "</div>" +
-              '<button type="button" class="btn btn-cart" onclick="agregarAlCarrito(' + prod.id + ')">🛒 Añadir</button>' +
+              '<button type="button" class="btn btn-cart" onclick="agregarAlCarrito(' + prod.id + ')">' + SVG_CARRITO_ANADIR + '<span>Añadir</span></button>' +
             "</div>" +
           "</div>";
         contenedor.appendChild(tarjeta);
