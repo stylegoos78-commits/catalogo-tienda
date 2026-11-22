@@ -72,6 +72,23 @@
       font-weight: 700;
     }
 
+    .topbar-wa {
+      color: #e2e8f0;
+      text-decoration: none;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: color 0.15s ease;
+    }
+
+    .topbar-wa strong {
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .topbar-wa:hover {
+      color: #ffffff;
+    }
+
     .header-main {
       max-width: 1200px;
       margin: 0 auto;
@@ -542,9 +559,6 @@
         padding: 0.38rem 0.85rem;
         font-size: 0.68rem;
       }
-      .topbar-hide-mobile {
-        display: none;
-      }
       .header-main {
         padding: 0.75rem 0.85rem;
         grid-template-columns: 1fr auto;
@@ -806,7 +820,7 @@
     <div class="topbar">
       <div class="topbar-inner">
         <span><strong class="topbar-badge">TURNER:</strong> tu tienda de recambio y herramientas de confianza</span>
-        <span class="topbar-hide-mobile">Compra directa o Plan Renove con metales en desuso</span>
+        <a href="https://wa.me/51951963856" target="_blank" rel="noopener" class="topbar-wa">WhatsApp: <strong>+51 951 963 856</strong></a>
       </div>
     </div>
 
