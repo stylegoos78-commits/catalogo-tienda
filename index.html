@@ -1173,9 +1173,9 @@
       let mensaje = "Hola *TURNER* 🔧, quiero realizar el siguiente pedido:\n\n";
       let total = 0;
 
-      carrito.forEach((item, idx) => {
+      carrito.forEach((item) => {
         const subtotal = item.precio * item.cantidad;
-        mensaje += (idx + 1) + ". x" + item.cantidad + " " + item.nombre + " (" + item.marca + ") - S/ " + subtotal.toFixed(2) + "\n";
+        mensaje += "• " + item.nombre + " (" + item.marca + ") — Cant.: " + item.cantidad + " — S/ " + subtotal.toFixed(2) + "\n";
         total += subtotal;
       });
 
