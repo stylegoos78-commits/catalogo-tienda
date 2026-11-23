@@ -156,9 +156,11 @@
       background: var(--accent);
       color: #ffffff;
       border: none;
+      border-left: 1px solid rgba(255, 255, 255, 0.28);
       padding: 0.68rem 1rem;
       font-weight: 800;
       font-size: 0.84rem;
+      text-transform: uppercase;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -174,10 +176,11 @@
     .cart-btn-header {
       background: var(--accent);
       color: #ffffff;
-      border: none;
+      border: 1px solid rgba(255, 255, 255, 0.22);
       padding: 0.65rem 1rem;
       border-radius: 10px;
       font-weight: 800;
+      text-transform: uppercase;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -214,8 +217,8 @@
       margin: 0 auto;
       padding: 0 1.5rem;
       display: flex;
-      align-items: center;
-      gap: 1.4rem;
+      align-items: stretch;
+      gap: 0;
       overflow-x: auto;
       scrollbar-width: none;
     }
@@ -227,27 +230,37 @@
     .nav-link {
       color: #e6e9ed;
       text-decoration: none;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
-      padding: 0.58rem 0;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      padding: 0.62rem 1rem;
       border-bottom: 2px solid transparent;
+      border-right: 1px solid rgba(255, 255, 255, 0.16);
       white-space: nowrap;
       background: none;
       border-top: none;
       border-left: none;
-      border-right: none;
       cursor: pointer;
-      transition: color 0.15s ease, border-color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .nav-link:first-child {
+      padding-left: 0;
+    }
+
+    .nav-link:last-child {
+      border-right: none;
+      padding-right: 0;
     }
 
     .nav-link:hover,
-    .nav-link.accent-link {
+    .nav-link.active-view {
       color: #ffffff;
-    }
-
-    .nav-link.accent-link {
       border-bottom-color: var(--accent);
-      color: #ffcdb2;
+      background: rgba(255, 255, 255, 0.05);
     }
 
     .container {
@@ -335,6 +348,7 @@
       display: flex;
       flex-direction: column;
       border: 1px solid var(--border);
+      cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
 
@@ -378,58 +392,6 @@
       text-transform: uppercase;
       letter-spacing: 0.4px;
       z-index: 2;
-    }
-
-    .gallery-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(28, 33, 39, 0.85);
-      color: #ffffff;
-      border: none;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      font-size: 0.95rem;
-      font-weight: 700;
-      cursor: pointer;
-      z-index: 2;
-      transition: background 0.15s ease;
-    }
-
-    .gallery-nav:hover {
-      background: var(--accent);
-      color: #ffffff;
-    }
-
-    .gallery-prev { left: 8px; }
-    .gallery-next { right: 8px; }
-
-    .gallery-dots {
-      position: absolute;
-      bottom: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 5px;
-      background: rgba(28, 33, 39, 0.78);
-      padding: 4px 8px;
-      border-radius: 999px;
-      z-index: 2;
-    }
-
-    .gallery-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.5);
-      border: none;
-      cursor: pointer;
-    }
-
-    .gallery-dot.active {
-      background: var(--accent);
-      transform: scale(1.25);
     }
 
     .card-body {
@@ -486,11 +448,18 @@
     .qty-btn {
       background: transparent;
       border: none;
+      border-right: 1px solid #c2c7cf;
       padding: 0.55rem 0.8rem;
       font-size: 1rem;
       font-weight: 700;
+      text-transform: uppercase;
       color: var(--primary);
       cursor: pointer;
+    }
+
+    .qty-btn:last-child {
+      border-right: none;
+      border-left: 1px solid #c2c7cf;
     }
 
     .qty-btn:hover {
@@ -510,10 +479,12 @@
       padding: 0.68rem;
       border-radius: 10px;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
       cursor: pointer;
       border: none;
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 0.84rem;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -528,6 +499,7 @@
     .btn-cart {
       background: linear-gradient(180deg, #252b33 0%, var(--primary) 100%);
       color: #ffffff;
+      border-bottom: 2px solid var(--accent);
     }
 
     .btn-cart-icon {
@@ -542,6 +514,7 @@
     .btn-cart:hover {
       background: var(--accent);
       color: #ffffff;
+      border-bottom-color: var(--primary);
     }
 
     .btn-cart:hover .btn-cart-icon {
@@ -552,10 +525,87 @@
     .btn-wa {
       background-color: var(--whatsapp);
       color: #ffffff;
+      border-bottom: 2px solid #169c48;
+      text-decoration: none;
     }
 
     .btn-wa:hover {
       background-color: var(--whatsapp-hover);
+    }
+
+    .info-section {
+      display: none;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--accent);
+      border-radius: 18px;
+      padding: 1.75rem;
+      box-shadow: 0 12px 26px -8px rgba(18, 21, 25, 0.12);
+      margin-bottom: 1.5rem;
+    }
+
+    .info-section.active {
+      display: block;
+    }
+
+    .info-kicker {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent-hover);
+      border: 1px solid #ffcdb2;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      margin-bottom: 0.65rem;
+    }
+
+    .info-section h2 {
+      font-size: 1.55rem;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .info-lead {
+      font-size: 0.96rem;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+
+    .info-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.35rem;
+    }
+
+    .info-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+
+    .info-box h3 {
+      font-size: 0.96rem;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .info-box p {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--gray);
+    }
+
+    .info-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
     }
 
     @media (max-width: 768px) {
@@ -603,7 +653,10 @@
       }
       .header-nav-inner {
         padding: 0 0.85rem;
-        gap: 1rem;
+      }
+      .nav-link {
+        padding: 0.58rem 0.7rem;
+        font-size: 0.72rem;
       }
       .container { padding: 0 0.75rem; margin: 1.1rem auto; }
       .brand-circle-btn { width: 55px; height: 55px; }
@@ -624,15 +677,22 @@
       .btn-actions { flex-direction: column; gap: 0.4rem; }
       .qty-selector { width: 100%; justify-content: space-between; }
       .qty-btn { padding: 0.4rem 0.75rem; }
-      .btn { width: 100%; padding: 0.55rem; font-size: 0.82rem; }
+      .btn { width: 100%; padding: 0.55rem; font-size: 0.78rem; }
       .btn-cart {
         background: var(--accent);
         color: #ffffff;
+        border-bottom-color: var(--primary);
       }
       .btn-cart-icon {
         width: 16px;
         height: 16px;
         color: #ffffff;
+      }
+      .info-section {
+        padding: 1.15rem;
+      }
+      .info-section h2 {
+        font-size: 1.25rem;
       }
     }
 
@@ -663,7 +723,7 @@
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(18, 21, 25, 0.62);
+      background: rgba(18, 21, 25, 0.68);
       display: none;
       justify-content: center;
       align-items: center;
@@ -683,6 +743,11 @@
       display: flex;
       flex-direction: column;
       max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-detail {
+      max-width: 680px;
     }
 
     .modal-header {
@@ -692,16 +757,143 @@
       margin-bottom: 0.9rem;
       border-bottom: 1px solid var(--border);
       padding-bottom: 0.7rem;
+      gap: 0.75rem;
     }
 
     .modal-header h2 { font-size: 1.15rem; color: var(--primary); }
 
     .close-modal {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
+      background: #f1f3f5;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 34px;
+      height: 34px;
+      font-size: 1.35rem;
+      line-height: 1;
       cursor: pointer;
+      color: var(--primary);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .close-modal:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+
+    .detail-stage {
+      position: relative;
+      width: 100%;
+      height: 310px;
+      background: #eceef1;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-bottom: 0.75rem;
+    }
+
+    .detail-stage img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .detail-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(28, 33, 39, 0.85);
+      color: #ffffff;
+      font-size: 1.3rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .detail-arrow:hover {
+      background: var(--accent);
+    }
+
+    .detail-prev { left: 12px; }
+    .detail-next { right: 12px; }
+
+    .detail-thumbs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.55rem;
+      margin-bottom: 1rem;
+    }
+
+    .detail-thumb-btn {
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      height: 68px;
+      padding: 0;
+      background: #eceef1;
+      cursor: pointer;
+      opacity: 0.75;
+      transition: all 0.15s ease;
+    }
+
+    .detail-thumb-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .detail-thumb-btn.active {
+      border-color: var(--accent);
+      opacity: 1;
+      box-shadow: 0 0 0 2px rgba(255, 85, 0, 0.25);
+    }
+
+    .detail-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.65rem;
+    }
+
+    .detail-brand-pill {
+      background: var(--primary);
+      color: #ffffff;
+      border-left: 3px solid var(--accent);
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+    }
+
+    .detail-desc {
+      font-size: 0.9rem;
+      line-height: 1.55;
       color: var(--gray);
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .detail-stage {
+        height: 215px;
+      }
+      .detail-thumbs {
+        gap: 0.35rem;
+      }
+      .detail-thumb-btn {
+        height: 52px;
+      }
     }
 
     .cart-items {
@@ -768,10 +960,13 @@
       background: var(--card-bg);
       color: var(--primary);
       border: 1.5px solid #c2c7cf;
+      border-bottom: 3px solid #9aa1ac;
       border-radius: 10px;
       padding: 0.6rem 0.5rem;
-      font-size: 0.8rem;
+      font-size: 0.76rem;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
       cursor: pointer;
       transition: all 0.18s ease;
     }
@@ -779,6 +974,7 @@
     .deal-choice-btn.active {
       background: var(--accent);
       border-color: var(--accent);
+      border-bottom-color: var(--primary);
       color: #ffffff;
     }
 
@@ -835,7 +1031,7 @@
 
       <div class="header-search">
         <input type="text" id="searchInput" placeholder="Buscar herramienta, modelo o marca..." oninput="filtrarProductos()" />
-        <button type="button" class="header-search-btn" onclick="document.getElementById('searchInput').focus()" aria-label="Buscar">🔍</button>
+        <button type="button" class="header-search-btn" onclick="document.getElementById('searchInput').focus()" aria-label="Buscar">🔍 BUSCAR</button>
       </div>
 
       <button type="button" class="cart-btn-header" onclick="abrirCarrito()">
@@ -848,27 +1044,110 @@
 
     <nav class="header-nav" aria-label="Navegación principal">
       <div class="header-nav-inner">
-        <a href="#catalogo" class="nav-link">Catálogo</a>
-        <a href="#brandsRow" class="nav-link">Marcas</a>
-        <button type="button" class="nav-link accent-link" onclick="abrirCarritoConPlanRenove()">Plan Renove</button>
-        <a href="https://wa.me/51951963856" target="_blank" rel="noopener" class="nav-link">WhatsApp</a>
+        <button type="button" id="navBtnCatalogo" class="nav-link active-view" onclick="cambiarVista('catalogo')">CATÁLOGO</button>
+        <button type="button" id="navBtnQuienesSomos" class="nav-link" onclick="cambiarVista('quienes-somos')">QUIÉNES SOMOS</button>
+        <button type="button" id="navBtnModalidad" class="nav-link" onclick="cambiarVista('modalidad')">CÓMO FUNCIONA LA MODALIDAD</button>
+        <a href="https://wa.me/51951963856" target="_blank" rel="noopener" class="nav-link">WHATSAPP</a>
       </div>
     </nav>
   </header>
 
   <div class="container">
-    <div class="brands-row" id="brandsRow">
-      <button type="button" id="btnMarcaTodas" class="brand-circle-btn all-circle active" onclick="seleccionarMarca('Todas', this)"><span>Todas</span></button>
-      <button type="button" class="brand-circle-btn" onclick="seleccionarMarca('Makita', this)"><span>Makita</span></button>
-      <button type="button" class="brand-circle-btn" onclick="seleccionarMarca('Bosch', this)"><span>Bosch</span></button>
-      <button type="button" class="brand-circle-btn" onclick="seleccionarMarca('Stanley', this)"><span>Stanley</span></button>
-      <button type="button" class="brand-circle-btn" onclick="seleccionarMarca('Truper', this)"><span>Truper</span></button>
-    </div>
+    <section id="vistaQuienesSomos" class="info-section" aria-label="Quiénes somos">
+      <span class="info-kicker">QUIÉNES SOMOS</span>
+      <h2>TURNER: Herramientas confiables y recambio real</h2>
+      <p class="info-lead">
+        En <strong>TURNER</strong> reunimos herramientas eléctricas y manuales de marcas reconocidas con una propuesta práctica pensada para talleres, técnicos y trabajadores independientes: comprar directo o aprovechar nuestro recambio con metales en desuso.
+      </p>
+      <div class="info-cards">
+        <div class="info-box">
+          <h3>Enfoque de taller</h3>
+          <p>Seleccionamos equipos de uso constante y alta rotación para trabajo diario, mantenimiento y montaje.</p>
+        </div>
+        <div class="info-box">
+          <h3>Atención directa</h3>
+          <p>Coordinas tu pedido sin trámites complicados, confirmando stock, precio referencial y modalidad por WhatsApp.</p>
+        </div>
+        <div class="info-box">
+          <h3>Recambio útil</h3>
+          <p>Damos una segunda salida a fierros viejos y herramientas averiadas para que renueves tu equipo.</p>
+        </div>
+      </div>
+      <div class="info-actions">
+        <button type="button" class="btn btn-cart" onclick="cambiarVista('catalogo')">VER CATÁLOGO</button>
+        <button type="button" class="btn btn-cart" onclick="cambiarVista('modalidad')">CÓMO FUNCIONA LA MODALIDAD</button>
+        <a href="https://wa.me/51951963856" target="_blank" rel="noopener" class="btn btn-wa">ESCRIBIR POR WHATSAPP</a>
+      </div>
+    </section>
 
-    <div id="catalogo" class="grid"></div>
+    <section id="vistaModalidad" class="info-section" aria-label="Cómo funciona la modalidad">
+      <span class="info-kicker">CÓMO FUNCIONA LA MODALIDAD</span>
+      <h2>Compra directa o Plan Renove con metales en desuso</h2>
+      <p class="info-lead">
+        Al cerrar tu pedido en el carrito puedes elegir entre pagar al contado o entregar material metálico en desuso como parte de pago dentro de nuestro <strong>Plan Renove</strong>.
+      </p>
+      <div class="info-cards">
+        <div class="info-box">
+          <h3>1. Compra directa</h3>
+          <p>Eliges la herramienta, revisas el total referencial y coordinas el pago por Yape, Plin, transferencia o efectivo.</p>
+        </div>
+        <div class="info-box">
+          <h3>2. Qué sí entra en Plan Renove</h3>
+          <p>Aceptamos fierros en desuso, herramientas malogradas y chachina o chatarra pesada para abonar como parte de pago.</p>
+        </div>
+        <div class="info-box">
+          <h3>3. Qué no se acepta</h3>
+          <p>No se recibe cartón, papel, plástico, madera ni desmonte de obra.</p>
+        </div>
+      </div>
+      <div class="info-actions">
+        <button type="button" class="btn btn-cart" onclick="abrirCarritoConPlanRenove()">ABRIR CARRITO EN PLAN RENOVE</button>
+        <button type="button" class="btn btn-cart" onclick="cambiarVista('catalogo')">IR AL CATÁLOGO</button>
+      </div>
+    </section>
+
+    <div id="seccionCatalogo">
+      <div class="brands-row" id="brandsRow">
+        <button type="button" id="btnMarcaTodas" class="brand-circle-btn all-circle active" onclick="seleccionarMarca('Todas', this)"><span>Todas</span></button>
+        <button type="button" class="brand-circle-btn" onclick="seleccionarMarca('Makita', this)"><span>Makita</span></button>
+        <button type="button" class="brand-circle-btn" onclick="seleccionarMarca('Bosch', this)"><span>Bosch</span></button>
+        <button type="button" class="brand-circle-btn" onclick="seleccionarMarca('Stanley', this)"><span>Stanley</span></button>
+        <button type="button" class="brand-circle-btn" onclick="seleccionarMarca('Truper', this)"><span>Truper</span></button>
+      </div>
+
+      <div id="catalogo" class="grid"></div>
+    </div>
   </div>
 
   <div id="toast" class="toast-notification">✅ <span id="toast-msg">Se guardó en el carrito</span></div>
+
+  <div id="detailModal" class="modal-overlay" onclick="cerrarModalPorFondo(event, 'detailModal')">
+    <div class="modal modal-detail">
+      <div class="modal-header">
+        <h2 id="detailTitle">Detalle de herramienta</h2>
+        <button type="button" class="close-modal" onclick="cerrarDetalleProducto()">&times;</button>
+      </div>
+      <div class="detail-stage">
+        <button type="button" class="detail-arrow detail-prev" onclick="cambiarImagenModal(-1)" aria-label="Imagen anterior">&#8249;</button>
+        <img id="detailMainImg" src="" alt="" />
+        <button type="button" class="detail-arrow detail-next" onclick="cambiarImagenModal(1)" aria-label="Siguiente imagen">&#8250;</button>
+      </div>
+      <div id="detailThumbs" class="detail-thumbs"></div>
+      <div class="detail-meta">
+        <span id="detailBrand" class="detail-brand-pill">MARCA</span>
+        <div id="detailPrice" class="price" style="margin-bottom: 0;">S/ 0</div>
+      </div>
+      <p id="detailDesc" class="detail-desc"></p>
+      <div class="btn-actions">
+        <div class="qty-selector">
+          <button type="button" class="qty-btn" onclick="cambiarCantidadModal(-1)">-</button>
+          <span id="detailQty" class="qty-value">1</span>
+          <button type="button" class="qty-btn" onclick="cambiarCantidadModal(1)">+</button>
+        </div>
+        <button type="button" id="detailAddBtn" class="btn btn-cart">AÑADIR AL CARRITO</button>
+      </div>
+    </div>
+  </div>
 
   <div id="cartModal" class="modal-overlay" onclick="cerrarModalPorFondo(event, 'cartModal')">
     <div class="modal">
@@ -880,26 +1159,122 @@
       <div class="payment-method-box">
         <label>¿Cómo deseas cerrar el trato?</label>
         <div class="deal-choice-grid">
-          <button type="button" id="btnTratoDirecta" class="deal-choice-btn active" onclick="seleccionarModalidadTrato('Opción 1: Compra directa (Efectivo / Yape / Plin)', this)">💵 Compra directa</button>
-          <button type="button" id="btnTratoRenove" class="deal-choice-btn" onclick="seleccionarModalidadTrato('Opción 2: Plan Renove (Parte de pago con metales en desuso)', this)">♻️ Plan Renove</button>
+          <button type="button" id="btnTratoDirecta" class="deal-choice-btn active" onclick="seleccionarModalidadTrato('Opción 1: Compra directa (Efectivo / Yape / Plin)', this)">💵 COMPRA DIRECTA</button>
+          <button type="button" id="btnTratoRenove" class="deal-choice-btn" onclick="seleccionarModalidadTrato('Opción 2: Plan Renove (Parte de pago con metales en desuso)', this)">♻️ PLAN RENOVE</button>
         </div>
       </div>
       <div id="dealSpecBanner" class="deal-spec-banner"></div>
       <div class="cart-total">Total referencial: S/ <span id="cartTotal">0.00</span></div>
-      <button type="button" class="btn btn-wa" onclick="enviarPedidoWhatsApp()" style="padding: 0.85rem; font-size: 0.95rem;">📲 Pedir por WhatsApp</button>
+      <button type="button" class="btn btn-wa" onclick="enviarPedidoWhatsApp()" style="padding: 0.85rem; font-size: 0.92rem;">📲 PEDIR POR WHATSAPP</button>
     </div>
   </div>
 
   <script>
     const productos = [
-      { id: 1, nombre: "Pistola de Impacto Inalámbrica", marca: "Bosch", precio: 420, descripcion: "Pistola de impacto 18V de alto torque con encastre hexagonal y luz LED.", imagenes: ["https://alaska.pe/wp-content/uploads/2023/08/Pistola-de-impacto-GDX-180-LI-Bosch-1.jpg", "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&auto=format&fit=crop&q=70"] },
-      { id: 2, nombre: "Taladro Percutor Profesional", marca: "Makita", precio: 390, descripcion: "Taladro percutor de velocidad variable y empuñadura ergonómica antideslizante.", imagenes: ["https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&auto=format&fit=crop&q=70", "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=600&auto=format&fit=crop&q=70"] },
-      { id: 3, nombre: "Llave Ajustable Cromada 12\"", marca: "Stanley", precio: 48, descripcion: "Llave francesa en acero cromo vanadio con escala métrica grabada.", imagenes: ["https://promart.vteximg.com.br/arquivos/ids/10738676-1000-1000/171506.jpg?v=639148862344200000", "https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?w=600&auto=format&fit=crop&q=70"] },
-      { id: 4, nombre: "Alicate Universal Aislado 8\"", marca: "Truper", precio: 35, descripcion: "Alicate de corte y sujeción en acero al cromo con mango confort grip.", imagenes: ["https://promart.vteximg.com.br/arquivos/ids/725105-1000-1000/133235.jpg?v=637484089782470000", "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=600&auto=format&fit=crop&q=70"] },
-      { id: 5, nombre: "Martillo de Carpintero Uña Curva", marca: "Stanley", precio: 52, descripcion: "Cabeza forjada en acero templado y mango anti-vibración.", imagenes: ["https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=600&auto=format&fit=crop&q=70", "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=600&auto=format&fit=crop&q=70"] },
-      { id: 6, nombre: "Amoladora Angular 4-1/2\" Heavy Duty", marca: "Makita", precio: 310, descripcion: "Esmeril angular compacto de alto rendimiento para corte y desbaste de metal.", imagenes: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhSypdjSu4gan4-4BUQwpv2jrnySjq6FiDVNAr6SMLC3uYCJ320zDU_-Ec&s=10", "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=600&auto=format&fit=crop&q=70"] },
-      { id: 7, nombre: "Juego de Rachi 1/2\" Americana", marca: "Truper", precio: 480, descripcion: "Set profesional de rachi y dados milimétricos/estándar en acero cromo vanadio.", imagenes: ["https://http2.mlstatic.com/D_NQ_NP_783658-MPE116169508128_092026-O.webp", "https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?w=600&auto=format&fit=crop&q=70"] },
-      { id: 8, nombre: "Rotomartillo SDS Plus 800W", marca: "Bosch", precio: 540, descripcion: "Potente rotomartillo de 3 modos para perforación en concreto, acero y madera.", imagenes: ["https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=600&auto=format&fit=crop&q=70", "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&auto=format&fit=crop&q=70"] }
+      {
+        id: 1,
+        nombre: "Pistola de Impacto Inalámbrica",
+        marca: "Bosch",
+        precio: 420,
+        descripcion: "Pistola de impacto 18V de alto torque con encastre hexagonal y luz LED.",
+        imagenes: [
+          "https://alaska.pe/wp-content/uploads/2023/08/Pistola-de-impacto-GDX-180-LI-Bosch-1.jpg",
+          "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&auto=format&fit=crop&q=70",
+          "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=600&auto=format&fit=crop&q=70",
+          "https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?w=600&auto=format&fit=crop&q=70"
+        ]
+      },
+      {
+        id: 2,
+        nombre: "Taladro Percutor Profesional",
+        marca: "Makita",
+        precio: 390,
+        descripcion: "Taladro percutor de velocidad variable y empuñadura ergonómica antideslizante.",
+        imagenes: [
+          "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&auto=format&fit=crop&q=70",
+          "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=600&auto=format&fit=crop&q=70",
+          "https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?w=600&auto=format&fit=crop&q=70",
+          "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=600&auto=format&fit=crop&q=70"
+        ]
+      },
+      {
+        id: 3,
+        nombre: "Llave Ajustable Cromada 12\"",
+        marca: "Stanley",
+        precio: 48,
+        descripcion: "Llave francesa en acero cromo vanadio con escala métrica grabada.",
+        imagenes: [
+          "https://promart.vteximg.com.br/arquivos/ids/10738676-1000-1000/171506.jpg?v=639148862344200000",
+          "https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?w=600&auto=format&fit=crop&q=70",
+          "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=600&auto=format&fit=crop&q=70",
+          "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=600&auto=format&fit=crop&q=70"
+        ]
+      },
+      {
+        id: 4,
+        nombre: "Alicate Universal Aislado 8\"",
+        marca: "Truper",
+        precio: 35,
+        descripcion: "Alicate de corte y sujeción en acero al cromo con mango confort grip.",
+        imagenes: [
+          "https://promart.vteximg.com.br/arquivos/ids/725105-1000-1000/133235.jpg?v=637484089782470000",
+          "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=600&auto=format&fit=crop&q=70",
+          "https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?w=600&auto=format&fit=crop&q=70",
+          "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=600&auto=format&fit=crop&q=70"
+        ]
+      },
+      {
+        id: 5,
+        nombre: "Martillo de Carpintero Uña Curva",
+        marca: "Stanley",
+        precio: 52,
+        descripcion: "Cabeza forjada en acero templado y mango anti-vibración.",
+        imagenes: [
+          "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=600&auto=format&fit=crop&q=70",
+          "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=600&auto=format&fit=crop&q=70",
+          "https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?w=600&auto=format&fit=crop&q=70",
+          "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&auto=format&fit=crop&q=70"
+        ]
+      },
+      {
+        id: 6,
+        nombre: "Amoladora Angular 4-1/2\" Heavy Duty",
+        marca: "Makita",
+        precio: 310,
+        descripcion: "Esmeril angular compacto de alto rendimiento para corte y desbaste de metal.",
+        imagenes: [
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhSypdjSu4gan4-4BUQwpv2jrnySjq6FiDVNAr6SMLC3uYCJ320zDU_-Ec&s=10",
+          "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=600&auto=format&fit=crop&q=70",
+          "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&auto=format&fit=crop&q=70",
+          "https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?w=600&auto=format&fit=crop&q=70"
+        ]
+      },
+      {
+        id: 7,
+        nombre: "Juego de Rachi 1/2\" Americana",
+        marca: "Truper",
+        precio: 480,
+        descripcion: "Set profesional de rachi y dados milimétricos/estándar en acero cromo vanadio.",
+        imagenes: [
+          "https://http2.mlstatic.com/D_NQ_NP_783658-MPE116169508128_092026-O.webp",
+          "https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?w=600&auto=format&fit=crop&q=70",
+          "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=600&auto=format&fit=crop&q=70",
+          "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=600&auto=format&fit=crop&q=70"
+        ]
+      },
+      {
+        id: 8,
+        nombre: "Rotomartillo SDS Plus 800W",
+        marca: "Bosch",
+        precio: 540,
+        descripcion: "Potente rotomartillo de 3 modos para perforación en concreto, acero y madera.",
+        imagenes: [
+          "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=600&auto=format&fit=crop&q=70",
+          "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&auto=format&fit=crop&q=70",
+          "https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?w=600&auto=format&fit=crop&q=70",
+          "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=600&auto=format&fit=crop&q=70"
+        ]
+      }
     ];
 
     const TELEFONO_WHATSAPP = "51951963856";
@@ -907,12 +1282,35 @@
     let marcaActiva = "Todas";
     let modalidadTratoSeleccionada = "Opción 1: Compra directa (Efectivo / Yape / Plin)";
     let toastTimeout;
-    const indiceImagenProducto = {};
+    let productoDetalleActualId = null;
+    let indiceImagenModal = 0;
 
     const ESPECIFICACIONES_MODALIDAD = {
       directa: "<strong>💵 Estás eligiendo la modalidad Compra directa:</strong><br>Pagas al precio publicado mediante <strong>Yape, Plin, transferencia bancaria o efectivo</strong> contra entrega o recojo.",
       renove: "<strong>♻️ Estás eligiendo el Plan Renove:</strong><br>Puedes entregar <strong>fierros en desuso, herramientas malogradas y chachina / chatarra pesada</strong> como parte de tu pago.<span class='deal-spec-warning'>⚠️ Recuerda: No aceptamos cartón, papel, plástico, madera ni desmonte.</span>"
     };
+
+    function cambiarVista(vista) {
+      const seccionCatalogo = document.getElementById("seccionCatalogo");
+      const vistaQuienesSomos = document.getElementById("vistaQuienesSomos");
+      const vistaModalidad = document.getElementById("vistaModalidad");
+
+      document.querySelectorAll(".header-nav-inner .nav-link").forEach(el => el.classList.remove("active-view"));
+
+      seccionCatalogo.style.display = vista === "catalogo" ? "block" : "none";
+      vistaQuienesSomos.classList.toggle("active", vista === "quienes-somos");
+      vistaModalidad.classList.toggle("active", vista === "modalidad");
+
+      if (vista === "catalogo") {
+        document.getElementById("navBtnCatalogo").classList.add("active-view");
+      } else if (vista === "quienes-somos") {
+        document.getElementById("navBtnQuienesSomos").classList.add("active-view");
+      } else if (vista === "modalidad") {
+        document.getElementById("navBtnModalidad").classList.add("active-view");
+      }
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
 
     function actualizarBannerModalidad() {
       const banner = document.getElementById("dealSpecBanner");
@@ -957,11 +1355,6 @@
       }
     }
 
-    function irATodasLasHerramientas() {
-      const btnTodas = document.getElementById("btnMarcaTodas");
-      seleccionarMarca("Todas", btnTodas);
-    }
-
     function seleccionarModalidadTrato(valor, btnElemento) {
       modalidadTratoSeleccionada = valor;
       document.querySelectorAll(".deal-choice-btn").forEach(btn => btn.classList.remove("active"));
@@ -975,38 +1368,86 @@
       abrirCarrito();
     }
 
-    function cambiarImagenProducto(id, direccion, event) {
+    function cambiarCantidadTarjeta(id, cambio, event) {
       if (event) event.stopPropagation();
-      const prod = productos.find(p => p.id === id);
-      if (!prod || prod.imagenes.length <= 1) return;
-      const actual = indiceImagenProducto[id] || 0;
-      indiceImagenProducto[id] = (actual + direccion + prod.imagenes.length) % prod.imagenes.length;
-      const imgEl = document.getElementById("img-" + id);
-      if (imgEl) imgEl.src = prod.imagenes[indiceImagenProducto[id]];
-      const dots = document.getElementById("dots-" + id);
-      if (dots) {
-        Array.from(dots.children).forEach((dot, i) => dot.classList.toggle("active", i === indiceImagenProducto[id]));
-      }
-    }
-
-    function irAImagenProducto(id, index, event) {
-      if (event) event.stopPropagation();
-      const prod = productos.find(p => p.id === id);
-      if (!prod) return;
-      indiceImagenProducto[id] = index;
-      const imgEl = document.getElementById("img-" + id);
-      if (imgEl) imgEl.src = prod.imagenes[index];
-      const dots = document.getElementById("dots-" + id);
-      if (dots) {
-        Array.from(dots.children).forEach((dot, i) => dot.classList.toggle("active", i === index));
-      }
-    }
-
-    function cambiarCantidadTarjeta(id, cambio) {
       const span = document.getElementById("qty-" + id);
       let cantidad = parseInt(span.innerText, 10) + cambio;
       if (cantidad < 1) cantidad = 1;
       span.innerText = cantidad;
+    }
+
+    function abrirDetalleProducto(id) {
+      const prod = productos.find(p => p.id === id);
+      if (!prod) return;
+
+      productoDetalleActualId = id;
+      indiceImagenModal = 0;
+
+      document.getElementById("detailTitle").innerText = prod.nombre;
+      document.getElementById("detailBrand").innerText = prod.marca;
+      document.getElementById("detailPrice").innerText = "S/ " + prod.precio;
+      document.getElementById("detailDesc").innerText = prod.descripcion;
+      document.getElementById("detailQty").innerText = "1";
+
+      const addBtn = document.getElementById("detailAddBtn");
+      addBtn.onclick = function () {
+        const cant = Math.max(1, parseInt(document.getElementById("detailQty").innerText, 10) || 1);
+        agregarCantidadAlCarrito(prod.id, cant);
+        document.getElementById("detailQty").innerText = "1";
+        cerrarDetalleProducto();
+      };
+
+      renderizarGaleriaModal(prod);
+      document.getElementById("detailModal").classList.add("active");
+    }
+
+    function renderizarGaleriaModal(prod) {
+      const imgs = prod.imagenes.slice(0, 4);
+      const mainImg = document.getElementById("detailMainImg");
+      const thumbsContainer = document.getElementById("detailThumbs");
+
+      mainImg.src = imgs[indiceImagenModal] || imgs[0];
+      mainImg.alt = prod.nombre + " - vista " + (indiceImagenModal + 1);
+
+      thumbsContainer.innerHTML = "";
+      imgs.forEach((src, i) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "detail-thumb-btn" + (i === indiceImagenModal ? " active" : "");
+        btn.setAttribute("aria-label", "Ver imagen " + (i + 1));
+        btn.onclick = function () {
+          indiceImagenModal = i;
+          renderizarGaleriaModal(prod);
+        };
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = prod.nombre + " miniatura " + (i + 1);
+        img.onerror = function () {
+          this.src = "https://via.placeholder.com/200x150/1c2127/FFFFFF?text=TURNER";
+        };
+        btn.appendChild(img);
+        thumbsContainer.appendChild(btn);
+      });
+    }
+
+    function cambiarImagenModal(direccion) {
+      const prod = productos.find(p => p.id === productoDetalleActualId);
+      if (!prod) return;
+      const totalImgs = Math.min(4, prod.imagenes.length);
+      indiceImagenModal = (indiceImagenModal + direccion + totalImgs) % totalImgs;
+      renderizarGaleriaModal(prod);
+    }
+
+    function cambiarCantidadModal(cambio) {
+      const span = document.getElementById("detailQty");
+      let cantidad = parseInt(span.innerText, 10) + cambio;
+      if (cantidad < 1) cantidad = 1;
+      span.innerText = cantidad;
+    }
+
+    function cerrarDetalleProducto() {
+      document.getElementById("detailModal").classList.remove("active");
+      productoDetalleActualId = null;
     }
 
     const SVG_CARRITO_ANADIR =
@@ -1027,26 +1468,15 @@
       }
 
       lista.forEach(prod => {
-        if (indiceImagenProducto[prod.id] === undefined) indiceImagenProducto[prod.id] = 0;
-        const idx = indiceImagenProducto[prod.id];
-        const tieneMultiples = prod.imagenes.length > 1;
-
-        const dotsHTML = tieneMultiples
-          ? '<div class="gallery-dots" id="dots-' + prod.id + '">' + prod.imagenes.map((_, i) => '<button type="button" class="gallery-dot ' + (i === idx ? "active" : "") + '" onclick="irAImagenProducto(' + prod.id + ', ' + i + ', event)"></button>').join("") + "</div>"
-          : "";
-
-        const navHTML = tieneMultiples
-          ? '<button type="button" class="gallery-nav gallery-prev" onclick="cambiarImagenProducto(' + prod.id + ', -1, event)">&#8249;</button><button type="button" class="gallery-nav gallery-next" onclick="cambiarImagenProducto(' + prod.id + ', 1, event)">&#8250;</button>'
-          : "";
-
         const tarjeta = document.createElement("div");
         tarjeta.className = "card";
+        tarjeta.onclick = function () {
+          abrirDetalleProducto(prod.id);
+        };
         tarjeta.innerHTML =
           '<div class="card-gallery">' +
             '<span class="brand-tag">' + prod.marca + "</span>" +
-            navHTML +
-            '<img id="img-' + prod.id + '" src="' + prod.imagenes[idx] + '" alt="' + prod.nombre + '" onerror="this.src=\'https://via.placeholder.com/400x300/1c2127/FFFFFF?text=TURNER\'">' +
-            dotsHTML +
+            '<img id="img-' + prod.id + '" src="' + prod.imagenes[0] + '" alt="' + prod.nombre + '" onerror="this.src=\'https://via.placeholder.com/400x300/1c2127/FFFFFF?text=TURNER\'">' +
           "</div>" +
           '<div class="card-body">' +
             '<h3 class="card-title">' + prod.nombre + "</h3>" +
@@ -1054,11 +1484,11 @@
             '<div class="price">S/ ' + prod.precio + "</div>" +
             '<div class="btn-actions">' +
               '<div class="qty-selector">' +
-                '<button type="button" class="qty-btn" onclick="cambiarCantidadTarjeta(' + prod.id + ', -1)">-</button>' +
+                '<button type="button" class="qty-btn" onclick="cambiarCantidadTarjeta(' + prod.id + ', -1, event)">-</button>' +
                 '<span id="qty-' + prod.id + '" class="qty-value">1</span>' +
-                '<button type="button" class="qty-btn" onclick="cambiarCantidadTarjeta(' + prod.id + ', 1)">+</button>' +
+                '<button type="button" class="qty-btn" onclick="cambiarCantidadTarjeta(' + prod.id + ', 1, event)">+</button>' +
               "</div>" +
-              '<button type="button" class="btn btn-cart" onclick="agregarAlCarrito(' + prod.id + ')">' + SVG_CARRITO_ANADIR + '<span>Añadir</span></button>' +
+              '<button type="button" class="btn btn-cart" onclick="agregarAlCarrito(' + prod.id + ', event)">' + SVG_CARRITO_ANADIR + '<span>AÑADIR</span></button>' +
             "</div>" +
           "</div>";
         contenedor.appendChild(tarjeta);
@@ -1089,10 +1519,9 @@
       renderizarProductos(base);
     }
 
-    function agregarAlCarrito(id) {
+    function agregarCantidadAlCarrito(id, cantidadAgregar) {
       const producto = productos.find(p => p.id === id);
-      const spanCantidad = document.getElementById("qty-" + id);
-      const cantidadAgregar = Math.max(1, parseInt(spanCantidad.innerText, 10) || 1);
+      if (!producto) return;
 
       const existente = carrito.find(item => item.id === id);
       if (existente) {
@@ -1101,9 +1530,16 @@
         carrito.push({ ...producto, cantidad: cantidadAgregar });
       }
 
-      spanCantidad.innerText = "1";
       actualizarCarritoUI();
       mostrarNotificacion("Añadido x" + cantidadAgregar + " · " + producto.nombre);
+    }
+
+    function agregarAlCarrito(id, event) {
+      if (event) event.stopPropagation();
+      const spanCantidad = document.getElementById("qty-" + id);
+      const cantidadAgregar = Math.max(1, parseInt(spanCantidad.innerText, 10) || 1);
+      agregarCantidadAlCarrito(id, cantidadAgregar);
+      spanCantidad.innerText = "1";
     }
 
     function actualizarCarritoUI() {
@@ -1160,7 +1596,11 @@
 
     function cerrarModalPorFondo(event, modalId) {
       if (event.target.id === modalId) {
-        document.getElementById(modalId).classList.remove("active");
+        if (modalId === "detailModal") {
+          cerrarDetalleProducto();
+        } else {
+          document.getElementById(modalId).classList.remove("active");
+        }
       }
     }
 
