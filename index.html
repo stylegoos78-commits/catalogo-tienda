@@ -427,7 +427,6 @@
       border-radius: 8px;
       display: inline-block;
       align-self: flex-start;
-      margin-bottom: 0.85rem;
     }
 
     .btn-actions {
@@ -671,13 +670,13 @@
       .card-title { font-size: 0.95rem; }
       .card-desc {
         font-size: 0.75rem;
-        margin-bottom: 0.6rem;
+        margin-bottom: 0.55rem;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
       }
-      .price { font-size: 1.05rem; padding: 0.15rem 0.45rem; margin-bottom: 0.6rem; }
+      .price { font-size: 1.05rem; padding: 0.15rem 0.45rem; }
       .btn-actions { flex-direction: column; gap: 0.4rem; }
       .qty-selector { width: 100%; justify-content: space-between; }
       .qty-btn { padding: 0.4rem 0.75rem; }
@@ -1126,7 +1125,7 @@
       <div id="detailThumbs" class="detail-thumbs"></div>
       <div class="detail-meta">
         <span id="detailBrand" class="detail-brand-pill">MARCA</span>
-        <div id="detailPrice" class="price" style="margin-bottom: 0;">S/ 0</div>
+        <div id="detailPrice" class="price">S/ 0</div>
       </div>
       <p id="detailDesc" class="detail-desc"></p>
       <div class="btn-actions">
@@ -1359,14 +1358,6 @@
       abrirCarrito();
     }
 
-    function cambiarCantidadTarjeta(id, cambio, event) {
-      if (event) event.stopPropagation();
-      const span = document.getElementById("qty-" + id);
-      let cantidad = parseInt(span.innerText, 10) + cambio;
-      if (cantidad < 1) cantidad = 1;
-      span.innerText = cantidad;
-    }
-
     function abrirDetalleProducto(id) {
       const prod = productos.find(p => p.id === id);
       if (!prod) return;
@@ -1441,14 +1432,6 @@
       productoDetalleActualId = null;
     }
 
-    const SVG_CARRITO_ANADIR =
-      '<svg class="btn-cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-        '<circle cx="9" cy="20" r="1.6" fill="currentColor" stroke="none"/>' +
-        '<circle cx="18" cy="20" r="1.6" fill="currentColor" stroke="none"/>' +
-        '<path d="M2 3h3l2.2 11.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 1.9-1.4L22 7H6.2"/>' +
-        '<path d="M13 8.5v4M11 10.5h4"/>' +
-      "</svg>";
-
     function renderizarProductos(lista) {
       const contenedor = document.getElementById("catalogo");
       contenedor.innerHTML = "";
@@ -1473,14 +1456,6 @@
             '<h3 class="card-title">' + prod.nombre + "</h3>" +
             '<p class="card-desc">' + prod.descripcion + "</p>" +
             '<div class="price">S/ ' + prod.precio + "</div>" +
-            '<div class="btn-actions">' +
-              '<div class="qty-selector">' +
-                '<button type="button" class="qty-btn" onclick="cambiarCantidadTarjeta(' + prod.id + ', -1, event)">-</button>' +
-                '<span id="qty-' + prod.id + '" class="qty-value">1</span>' +
-                '<button type="button" class="qty-btn" onclick="cambiarCantidadTarjeta(' + prod.id + ', 1, event)">+</button>' +
-              "</div>" +
-              '<button type="button" class="btn btn-cart" onclick="agregarAlCarrito(' + prod.id + ', event)">' + SVG_CARRITO_ANADIR + '<span>AÑADIR</span></button>' +
-            "</div>" +
           "</div>";
         contenedor.appendChild(tarjeta);
       });
@@ -1523,14 +1498,6 @@
 
       actualizarCarritoUI();
       mostrarNotificacion("Añadido x" + cantidadAgregar + " · " + producto.nombre);
-    }
-
-    function agregarAlCarrito(id, event) {
-      if (event) event.stopPropagation();
-      const spanCantidad = document.getElementById("qty-" + id);
-      const cantidadAgregar = Math.max(1, parseInt(spanCantidad.innerText, 10) || 1);
-      agregarCantidadAlCarrito(id, cantidadAgregar);
-      spanCantidad.innerText = "1";
     }
 
     function actualizarCarritoUI() {
