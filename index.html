@@ -599,6 +599,11 @@
       margin-bottom: 1.35rem;
     }
 
+    .info-cards.two-cols {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-bottom: 0;
+    }
+
     .info-box {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -616,6 +621,13 @@
     .info-box p {
       font-size: 0.85rem;
       line-height: 1.5;
+      color: var(--gray);
+    }
+
+    .info-note-muted {
+      display: block;
+      margin-top: 0.45rem;
+      font-size: 0.8rem;
       color: var(--gray);
     }
 
@@ -1072,6 +1084,9 @@
       .info-section h2 {
         font-size: 1.25rem;
       }
+      .info-cards.two-cols {
+        grid-template-columns: 1fr;
+      }
       .detail-stage {
         height: 215px;
       }
@@ -1144,27 +1159,22 @@
     <!-- Vista: Cómo funciona la modalidad -->
     <section id="vistaModalidad" class="info-section" aria-label="Cómo funciona la modalidad">
       <span class="info-kicker">CÓMO FUNCIONA LA MODALIDAD</span>
-      <h2>Compra directa o Plan Renove con metales en desuso</h2>
+      <h2>Compra directa o Torner Renove</h2>
       <p class="info-lead">
-        Al cerrar tu pedido en el carrito puedes elegir entre pagar al contado o entregar material metálico en desuso como parte de pago dentro de nuestro <strong>Plan Renove</strong>.
+        Al cerrar tu pedido en el carrito puedes elegir entre pagar al contado con la opcion <strong>compra directa</strong> o entregar material metalico en desuso como parte de pago dentro de nuestra opcion <strong>torner renove.</strong>
       </p>
-      <div class="info-cards">
+      <div class="info-cards two-cols">
         <div class="info-box">
           <h3>1. Compra directa</h3>
-          <p>Eliges la herramienta, revisas el total referencial y coordinas el pago por Yape, Plin, transferencia o efectivo.</p>
+          <p>1. Eliges tus herramientas, revisas el total referencial y pagas por yape o plin</p>
         </div>
         <div class="info-box">
-          <h3>2. Qué sí entra en Plan Renove</h3>
-          <p>Aceptamos fierros en desuso, herramientas malogradas y chachina o chatarra pesada para abonar como parte de pago.</p>
+          <h3>2. Torner Renove</h3>
+          <p>
+            2. Torner Renove — Intercambias tus fierros o metales en desuso, herramientas malogradas cachina/chatarra pesada por <strong>herramientas nuevas</strong>, cordinando los detalles al cerrar tu pedido.
+            <span class="info-note-muted">(No recibimos: cartón, papel, plástico, madera, ni latas.)</span>
+          </p>
         </div>
-        <div class="info-box">
-          <h3>3. Qué no se acepta</h3>
-          <p>No se recibe cartón, papel, plástico, madera ni desmonte de obra.</p>
-        </div>
-      </div>
-      <div class="info-actions">
-        <button type="button" class="btn btn-cart" onclick="abrirCarritoConPlanRenove()">ABRIR CARRITO EN PLAN RENOVE</button>
-        <button type="button" class="btn btn-cart" onclick="cambiarVista('catalogo')">IR AL CATÁLOGO</button>
       </div>
     </section>
 
@@ -1351,7 +1361,7 @@
 
     const ESPECIFICACIONES_MODALIDAD = {
       directa: "<strong>💵 Estás eligiendo la modalidad Compra directa:</strong><br>Pagas al precio publicado mediante <strong>Yape, Plin, transferencia bancaria o efectivo</strong> contra entrega o recojo.",
-      renove: "<strong>♻️ Estás eligiendo el Plan Renove:</strong><br>Puedes entregar <strong>fierros en desuso, herramientas malogradas y chachina / pesada</strong> como parte de tu pago.<span class='deal-spec-warning'>⚠️ Recuerda: No aceptamos cartón, papel, plástico, madera o latas.</span>"
+      renove: "<strong>♻️ Estás eligiendo el Plan Renove:</strong><br>Puedes entregar <strong>fierros en desuso, herramientas malogradas y chachina / chatarra pesada</strong> como parte de tu pago.<span class='deal-spec-warning'>⚠️ Recuerda: No aceptamos cartón, papel, plástico, madera ni desmonte.</span>"
     };
 
     // --- Estado de la aplicación ---
