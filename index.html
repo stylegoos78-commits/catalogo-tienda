@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- =====================================================================
+       1. METADATOS Y FUENTES
+       ===================================================================== -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="catalog-status" id="metaCatalogStatus" content="Mostrando Todas las herramientas (orden aleatorio) - 8 productos" />
   <title>TORNER - Tu tienda de recambio y herramientas de confianza</title>
   <link href="https://fonts.googleapis.com/css2?family=Tekton:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- =====================================================================
+       2. ESTILOS (CSS)
+       ===================================================================== -->
   <style>
+    /* --- Variables de marca y tema --- */
     :root {
       --primary: #212221;
       --primary-hover: #2c2e2c;
@@ -26,6 +34,7 @@
       --whatsapp-hover: #20ba5a;
     }
 
+    /* --- Reset y base --- */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -43,6 +52,7 @@
       padding-bottom: 4.5rem;
     }
 
+    /* --- Encabezado y navegación --- */
     header {
       background: linear-gradient(180deg, #292a29 0%, var(--primary) 100%);
       color: #ffffff;
@@ -263,6 +273,7 @@
       background: rgba(255, 255, 255, 0.05);
     }
 
+    /* --- Contenedor y filtros de marca --- */
     .container {
       max-width: 1200px;
       margin: 1.5rem auto;
@@ -333,6 +344,7 @@
       border-color: var(--accent);
     }
 
+    /* --- Grilla y tarjetas de producto --- */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
@@ -429,6 +441,7 @@
       align-self: flex-start;
     }
 
+    /* --- Botones y controles de cantidad --- */
     .btn-actions {
       display: flex;
       gap: 0.55rem;
@@ -532,6 +545,7 @@
       background-color: var(--whatsapp-hover);
     }
 
+    /* --- Secciones informativas (Quiénes Somos y Modalidad) --- */
     .info-section {
       display: none;
       background: var(--card-bg);
@@ -611,94 +625,7 @@
       gap: 0.75rem;
     }
 
-    @media (max-width: 768px) {
-      .topbar-inner {
-        padding: 0.38rem 0.85rem;
-        font-size: 0.68rem;
-      }
-      .header-main {
-        padding: 0.75rem 0.85rem;
-        grid-template-columns: 1fr auto;
-        grid-template-areas:
-          "brand cart"
-          "search search";
-        gap: 0.65rem;
-      }
-      .brand-box {
-        grid-area: brand;
-        min-width: 0;
-      }
-      .brand-title {
-        font-size: 1.75rem;
-        letter-spacing: 1.5px;
-      }
-      .cart-btn-header {
-        grid-area: cart;
-        padding: 0.48rem 0.68rem;
-        font-size: 0.82rem;
-        border-radius: 9px;
-        gap: 0.3rem;
-      }
-      .cart-svg-black {
-        width: 17px;
-        height: 17px;
-      }
-      .header-search {
-        grid-area: search;
-      }
-      .header-search input {
-        padding: 0.56rem 0.75rem;
-        font-size: 0.85rem;
-      }
-      .header-search-btn {
-        padding: 0.56rem 0.8rem;
-        font-size: 0.8rem;
-      }
-      .header-nav-inner {
-        padding: 0 0.85rem;
-      }
-      .nav-link {
-        padding: 0.58rem 0.7rem;
-        font-size: 0.72rem;
-      }
-      .container { padding: 0 0.75rem; margin: 1.1rem auto; }
-      .brand-circle-btn { width: 55px; height: 55px; }
-      .brand-circle-btn span { font-size: 0.58rem; }
-      .grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
-      .card-gallery { height: 135px; }
-      .card-body { padding: 0.85rem; }
-      .card-title { font-size: 0.95rem; }
-      .card-desc {
-        font-size: 0.75rem;
-        margin-bottom: 0.55rem;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-      }
-      .price { font-size: 1.05rem; padding: 0.15rem 0.45rem; }
-      .btn-actions { flex-direction: column; gap: 0.4rem; }
-      .qty-selector { width: 100%; justify-content: space-between; }
-      .qty-btn { padding: 0.4rem 0.75rem; }
-      .btn { width: 100%; padding: 0.55rem; font-size: 0.78rem; }
-      .btn-cart {
-        background: var(--accent);
-        color: #ffffff;
-        border-bottom-color: var(--primary);
-      }
-      .btn-cart-icon {
-        width: 16px;
-        height: 16px;
-        color: #ffffff;
-      }
-      .info-section {
-        padding: 1.15rem;
-      }
-      .info-section h2 {
-        font-size: 1.25rem;
-      }
-    }
-
+    /* --- Notificación flotante (Toast) --- */
     .toast-notification {
       position: fixed;
       bottom: 24px;
@@ -721,11 +648,18 @@
       transition: opacity 0.25s ease, transform 0.25s ease;
     }
 
-    .toast-notification.show { opacity: 1; transform: translateY(0); }
+    .toast-notification.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
+    /* --- Modales (Detalle y Carrito) --- */
     .modal-overlay {
       position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background: rgba(24, 25, 24, 0.68);
       display: none;
       justify-content: center;
@@ -734,7 +668,9 @@
       padding: 1rem;
     }
 
-    .modal-overlay.active { display: flex; }
+    .modal-overlay.active {
+      display: flex;
+    }
 
     .modal {
       background: var(--card-bg);
@@ -763,7 +699,10 @@
       gap: 0.75rem;
     }
 
-    .modal-header h2 { font-size: 1.15rem; color: var(--primary); }
+    .modal-header h2 {
+      font-size: 1.15rem;
+      color: var(--primary);
+    }
 
     .close-modal {
       background: #f1f3f5;
@@ -887,18 +826,6 @@
       margin-bottom: 1rem;
     }
 
-    @media (max-width: 768px) {
-      .detail-stage {
-        height: 215px;
-      }
-      .detail-thumbs {
-        gap: 0.35rem;
-      }
-      .detail-thumb-btn {
-        height: 52px;
-      }
-    }
-
     .cart-items {
       overflow-y: auto;
       flex-grow: 1;
@@ -916,7 +843,12 @@
       font-size: 0.9rem;
     }
 
-    .cart-item-info { display: flex; align-items: center; gap: 0.65rem; min-width: 0; }
+    .cart-item-info {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      min-width: 0;
+    }
 
     .cart-item-thumb {
       width: 44px;
@@ -1015,10 +947,148 @@
       color: var(--primary);
     }
 
-    .empty-cart { text-align: center; color: var(--gray); padding: 1.8rem 0; }
+    .empty-cart {
+      text-align: center;
+      color: var(--gray);
+      padding: 1.8rem 0;
+    }
+
+    /* --- Adaptación móvil (≤ 768px) --- */
+    @media (max-width: 768px) {
+      .topbar-inner {
+        padding: 0.38rem 0.85rem;
+        font-size: 0.68rem;
+      }
+      .header-main {
+        padding: 0.75rem 0.85rem;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+          "brand cart"
+          "search search";
+        gap: 0.65rem;
+      }
+      .brand-box {
+        grid-area: brand;
+        min-width: 0;
+      }
+      .brand-title {
+        font-size: 1.75rem;
+        letter-spacing: 1.5px;
+      }
+      .cart-btn-header {
+        grid-area: cart;
+        padding: 0.48rem 0.68rem;
+        font-size: 0.82rem;
+        border-radius: 9px;
+        gap: 0.3rem;
+      }
+      .cart-svg-black {
+        width: 17px;
+        height: 17px;
+      }
+      .header-search {
+        grid-area: search;
+      }
+      .header-search input {
+        padding: 0.56rem 0.75rem;
+        font-size: 0.85rem;
+      }
+      .header-search-btn {
+        padding: 0.56rem 0.8rem;
+        font-size: 0.8rem;
+      }
+      .header-nav-inner {
+        padding: 0 0.85rem;
+      }
+      .nav-link {
+        padding: 0.58rem 0.7rem;
+        font-size: 0.72rem;
+      }
+      .container {
+        padding: 0 0.75rem;
+        margin: 1.1rem auto;
+      }
+      .brand-circle-btn {
+        width: 55px;
+        height: 55px;
+      }
+      .brand-circle-btn span {
+        font-size: 0.58rem;
+      }
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+      }
+      .card-gallery {
+        height: 135px;
+      }
+      .card-body {
+        padding: 0.85rem;
+      }
+      .card-title {
+        font-size: 0.95rem;
+      }
+      .card-desc {
+        font-size: 0.75rem;
+        margin-bottom: 0.55rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .price {
+        font-size: 1.05rem;
+        padding: 0.15rem 0.45rem;
+      }
+      .btn-actions {
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .qty-selector {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .qty-btn {
+        padding: 0.4rem 0.75rem;
+      }
+      .btn {
+        width: 100%;
+        padding: 0.55rem;
+        font-size: 0.78rem;
+      }
+      .btn-cart {
+        background: var(--accent);
+        color: #ffffff;
+        border-bottom-color: var(--primary);
+      }
+      .btn-cart-icon {
+        width: 16px;
+        height: 16px;
+        color: #ffffff;
+      }
+      .info-section {
+        padding: 1.15rem;
+      }
+      .info-section h2 {
+        font-size: 1.25rem;
+      }
+      .detail-stage {
+        height: 215px;
+      }
+      .detail-thumbs {
+        gap: 0.35rem;
+      }
+      .detail-thumb-btn {
+        height: 52px;
+      }
+    }
   </style>
 </head>
+
 <body>
+  <!-- =====================================================================
+       3. ESTRUCTURA PRINCIPAL (HTML)
+       ===================================================================== -->
   <header>
     <div class="topbar">
       <div class="topbar-inner">
@@ -1056,6 +1126,7 @@
   </header>
 
   <div class="container">
+    <!-- Vista: Quiénes Somos -->
     <section id="vistaQuienesSomos" class="info-section" aria-label="Quiénes somos">
       <span class="info-kicker">QUIÉNES SOMOS</span>
       <h2>Tu respaldo en herramientas y recambio</h2>
@@ -1070,6 +1141,7 @@
       </p>
     </section>
 
+    <!-- Vista: Cómo funciona la modalidad -->
     <section id="vistaModalidad" class="info-section" aria-label="Cómo funciona la modalidad">
       <span class="info-kicker">CÓMO FUNCIONA LA MODALIDAD</span>
       <h2>Compra directa o Plan Renove con metales en desuso</h2>
@@ -1096,6 +1168,7 @@
       </div>
     </section>
 
+    <!-- Vista: Catálogo -->
     <div id="seccionCatalogo">
       <div class="brands-row" id="brandsRow">
         <button type="button" id="btnMarcaTodas" class="brand-circle-btn all-circle active" onclick="seleccionarMarca('Todas', this)"><span>Todas</span></button>
@@ -1109,8 +1182,10 @@
     </div>
   </div>
 
+  <!-- Aviso flotante -->
   <div id="toast" class="toast-notification">✅ <span id="toast-msg">Se guardó en el carrito</span></div>
 
+  <!-- Modal: Detalle de herramienta -->
   <div id="detailModal" class="modal-overlay" onclick="cerrarModalPorFondo(event, 'detailModal')">
     <div class="modal modal-detail">
       <div class="modal-header">
@@ -1139,6 +1214,7 @@
     </div>
   </div>
 
+  <!-- Modal: Carrito de compras -->
   <div id="cartModal" class="modal-overlay" onclick="cerrarModalPorFondo(event, 'cartModal')">
     <div class="modal">
       <div class="modal-header">
@@ -1159,7 +1235,11 @@
     </div>
   </div>
 
+  <!-- =====================================================================
+       4. LÓGICA DE TIENDA Y CARRITO (JAVASCRIPT)
+       ===================================================================== -->
   <script>
+    // --- Datos de catálogo y configuración ---
     const productos = [
       {
         id: 1,
@@ -1268,6 +1348,13 @@
     ];
 
     const TELEFONO_WHATSAPP = "51951963856";
+
+    const ESPECIFICACIONES_MODALIDAD = {
+      directa: "<strong>💵 Estás eligiendo la modalidad Compra directa:</strong><br>Pagas al precio publicado mediante <strong>Yape, Plin, transferencia bancaria o efectivo</strong> contra entrega o recojo.",
+      renove: "<strong>♻️ Estás eligiendo el Plan Renove:</strong><br>Puedes entregar <strong>fierros en desuso, herramientas malogradas y chachina / chatarra pesada</strong> como parte de tu pago.<span class='deal-spec-warning'>⚠️ Recuerda: No aceptamos cartón, papel, plástico, madera ni desmonte.</span>"
+    };
+
+    // --- Estado de la aplicación ---
     let carrito = [];
     let marcaActiva = "Todas";
     let modalidadTratoSeleccionada = "Opción 1: Compra directa (Efectivo / Yape / Plin)";
@@ -1275,11 +1362,7 @@
     let productoDetalleActualId = null;
     let indiceImagenModal = 0;
 
-    const ESPECIFICACIONES_MODALIDAD = {
-      directa: "<strong>💵 Estás eligiendo la modalidad Compra directa:</strong><br>Pagas al precio publicado mediante <strong>Yape, Plin, transferencia bancaria o efectivo</strong> contra entrega o recojo.",
-      renove: "<strong>♻️ Estás eligiendo el Plan Renove:</strong><br>Puedes entregar <strong>fierros en desuso, herramientas malogradas y chachina / chatarra pesada</strong> como parte de tu pago.<span class='deal-spec-warning'>⚠️ Recuerda: No aceptamos cartón, papel, plástico, madera ni desmonte.</span>"
-    };
-
+    // --- Navegación entre vistas ---
     function cambiarVista(vista) {
       const seccionCatalogo = document.getElementById("seccionCatalogo");
       const vistaQuienesSomos = document.getElementById("vistaQuienesSomos");
@@ -1302,18 +1385,7 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    function actualizarBannerModalidad() {
-      const banner = document.getElementById("dealSpecBanner");
-      if (!banner) return;
-      if (modalidadTratoSeleccionada.includes("Plan Renove")) {
-        banner.classList.add("renove-active");
-        banner.innerHTML = ESPECIFICACIONES_MODALIDAD.renove;
-      } else {
-        banner.classList.remove("renove-active");
-        banner.innerHTML = ESPECIFICACIONES_MODALIDAD.directa;
-      }
-    }
-
+    // --- Utilidades y notificaciones ---
     function mezclarAlAzar(array) {
       const copia = [...array];
       for (let i = copia.length - 1; i > 0; i--) {
@@ -1328,9 +1400,12 @@
       document.getElementById("toast-msg").innerText = texto;
       toast.classList.add("show");
       clearTimeout(toastTimeout);
-      toastTimeout = setTimeout(() => { toast.classList.remove("show"); }, 2000);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2000);
     }
 
+    // --- Filtros y renderizado del catálogo ---
     function seleccionarMarca(marca, btnElemento) {
       marcaActiva = marca;
       if (marca === "Todas") {
@@ -1345,19 +1420,60 @@
       }
     }
 
-    function seleccionarModalidadTrato(valor, btnElemento) {
-      modalidadTratoSeleccionada = valor;
-      document.querySelectorAll(".deal-choice-btn").forEach(btn => btn.classList.remove("active"));
-      if (btnElemento) btnElemento.classList.add("active");
-      actualizarBannerModalidad();
+    function renderizarProductos(lista) {
+      const contenedor = document.getElementById("catalogo");
+      contenedor.innerHTML = "";
+
+      if (lista.length === 0) {
+        contenedor.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #5c605e; padding: 2rem;">No se encontraron herramientas.</p>';
+        return;
+      }
+
+      lista.forEach(prod => {
+        const tarjeta = document.createElement("div");
+        tarjeta.className = "card";
+        tarjeta.onclick = function () {
+          abrirDetalleProducto(prod.id);
+        };
+        tarjeta.innerHTML =
+          '<div class="card-gallery">' +
+            '<span class="brand-tag">' + prod.marca + "</span>" +
+            '<img id="img-' + prod.id + '" src="' + prod.imagenes[0] + '" alt="' + prod.nombre + '" onerror="this.src=\'https://via.placeholder.com/400x300/212221/FFFFFF?text=TORNER\'">' +
+          "</div>" +
+          '<div class="card-body">' +
+            '<h3 class="card-title">' + prod.nombre + "</h3>" +
+            '<p class="card-desc">' + prod.descripcion + "</p>" +
+            '<div class="price">S/ ' + prod.precio + "</div>" +
+          "</div>";
+        contenedor.appendChild(tarjeta);
+      });
     }
 
-    function abrirCarritoConPlanRenove() {
-      const btnRenove = document.getElementById("btnTratoRenove");
-      seleccionarModalidadTrato("Opción 2: Plan Renove (Parte de pago con metales en desuso)", btnRenove);
-      abrirCarrito();
+    function filtrarProductos() {
+      const texto = document.getElementById("searchInput").value.toLowerCase().trim();
+      const metaStatus = document.getElementById("metaCatalogStatus");
+
+      let base = marcaActiva === "Todas"
+        ? mezclarAlAzar(productos)
+        : productos.filter(p => p.marca.toLowerCase() === marcaActiva.toLowerCase());
+
+      if (texto) {
+        base = base.filter(p =>
+          p.nombre.toLowerCase().includes(texto) ||
+          p.descripcion.toLowerCase().includes(texto) ||
+          p.marca.toLowerCase().includes(texto)
+        );
+      }
+
+      if (metaStatus) {
+        const etiquetaMarca = marcaActiva === "Todas" ? "Todas las herramientas (orden aleatorio)" : "Marca: " + marcaActiva;
+        metaStatus.setAttribute("content", etiquetaMarca + " - " + base.length + " productos");
+      }
+
+      renderizarProductos(base);
     }
 
+    // --- Modal de detalle y galería ---
     function abrirDetalleProducto(id) {
       const prod = productos.find(p => p.id === id);
       if (!prod) return;
@@ -1432,57 +1548,30 @@
       productoDetalleActualId = null;
     }
 
-    function renderizarProductos(lista) {
-      const contenedor = document.getElementById("catalogo");
-      contenedor.innerHTML = "";
-
-      if (lista.length === 0) {
-        contenedor.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #5c605e; padding: 2rem;">No se encontraron herramientas.</p>';
-        return;
+    // --- Carrito, modalidad y envío por WhatsApp ---
+    function actualizarBannerModalidad() {
+      const banner = document.getElementById("dealSpecBanner");
+      if (!banner) return;
+      if (modalidadTratoSeleccionada.includes("Plan Renove")) {
+        banner.classList.add("renove-active");
+        banner.innerHTML = ESPECIFICACIONES_MODALIDAD.renove;
+      } else {
+        banner.classList.remove("renove-active");
+        banner.innerHTML = ESPECIFICACIONES_MODALIDAD.directa;
       }
-
-      lista.forEach(prod => {
-        const tarjeta = document.createElement("div");
-        tarjeta.className = "card";
-        tarjeta.onclick = function () {
-          abrirDetalleProducto(prod.id);
-        };
-        tarjeta.innerHTML =
-          '<div class="card-gallery">' +
-            '<span class="brand-tag">' + prod.marca + "</span>" +
-            '<img id="img-' + prod.id + '" src="' + prod.imagenes[0] + '" alt="' + prod.nombre + '" onerror="this.src=\'https://via.placeholder.com/400x300/212221/FFFFFF?text=TORNER\'">' +
-          "</div>" +
-          '<div class="card-body">' +
-            '<h3 class="card-title">' + prod.nombre + "</h3>" +
-            '<p class="card-desc">' + prod.descripcion + "</p>" +
-            '<div class="price">S/ ' + prod.precio + "</div>" +
-          "</div>";
-        contenedor.appendChild(tarjeta);
-      });
     }
 
-    function filtrarProductos() {
-      const texto = document.getElementById("searchInput").value.toLowerCase().trim();
-      const metaStatus = document.getElementById("metaCatalogStatus");
+    function seleccionarModalidadTrato(valor, btnElemento) {
+      modalidadTratoSeleccionada = valor;
+      document.querySelectorAll(".deal-choice-btn").forEach(btn => btn.classList.remove("active"));
+      if (btnElemento) btnElemento.classList.add("active");
+      actualizarBannerModalidad();
+    }
 
-      let base = marcaActiva === "Todas"
-        ? mezclarAlAzar(productos)
-        : productos.filter(p => p.marca.toLowerCase() === marcaActiva.toLowerCase());
-
-      if (texto) {
-        base = base.filter(p =>
-          p.nombre.toLowerCase().includes(texto) ||
-          p.descripcion.toLowerCase().includes(texto) ||
-          p.marca.toLowerCase().includes(texto)
-        );
-      }
-
-      if (metaStatus) {
-        const etiquetaMarca = marcaActiva === "Todas" ? "Todas las herramientas (orden aleatorio)" : "Marca: " + marcaActiva;
-        metaStatus.setAttribute("content", etiquetaMarca + " - " + base.length + " productos");
-      }
-
-      renderizarProductos(base);
+    function abrirCarritoConPlanRenove() {
+      const btnRenove = document.getElementById("btnTratoRenove");
+      seleccionarModalidadTrato("Opción 2: Plan Renove (Parte de pago con metales en desuso)", btnRenove);
+      abrirCarrito();
     }
 
     function agregarCantidadAlCarrito(id, cantidadAgregar) {
@@ -1583,6 +1672,7 @@
       window.open("https://wa.me/" + TELEFONO_WHATSAPP + "?text=" + encodeURIComponent(mensaje), "_blank");
     }
 
+    // --- Inicialización ---
     actualizarBannerModalidad();
     filtrarProductos();
   </script>
